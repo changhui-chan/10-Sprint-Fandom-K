@@ -6,7 +6,11 @@
 }
 
 body {
-  font-family: Pretendard Variable, Pretendard, sans-serif;
+  font-family:
+    Pretendard Variable,
+    Pretendard,
+    sans-serif;
+  background-color: variables.$black;
 }
 
 ul,
