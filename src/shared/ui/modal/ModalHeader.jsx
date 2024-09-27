@@ -1,7 +1,11 @@
-const ModalHeader = () => {
+import CloseIcon from '@/assets/images/btn-delete.svg';
+import styles from './ModalHeader.module.scss';
+
+const ModalHeader = ({ headerText }) => {
   return (
-    <div>
-      <p>dd</p>
+    <div className={styles.container}>
+      <p>{headerText}</p>
+      <img src={CloseIcon} alt="close" />
     </div>
   );
 };

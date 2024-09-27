@@ -4,7 +4,7 @@ import ModalFooter from './ModalFooter';
 import Button from '../Button';
 
 const Modal = ({
-  headerText = '모달 헤더 텍스트',
+  headerText = '',
   footerElement = null,
   children = null,
   sectionMarginTop = '24px',
@@ -21,6 +21,7 @@ const Modal = ({
             marginTop: sectionMarginTop,
             marginBottom: sectionMarginBottom,
           }}
+          className={styles.content}
         >
           {children}
         </div>
