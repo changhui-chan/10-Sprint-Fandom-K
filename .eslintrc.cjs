@@ -39,5 +39,6 @@ module.exports = {
     'react/jsx-fragments': 'off',
     'no-unused-vars': 'warn',
     'no-console': 'warn',
+    'react/button-has-type': 'off',
   },
 };
