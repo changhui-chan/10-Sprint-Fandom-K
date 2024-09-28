@@ -8,8 +8,7 @@ const Modal = ({
   headerText = '',
   footerElement = null,
   children = null,
-  sectionMarginTop = '24px',
-  sectionMarginBottom = '24px',
+  customModalContentStyle = {},
   buttonText = '확인',
   buttonClick = () => {},
 }) => {
@@ -21,13 +20,7 @@ const Modal = ({
         <div className={styles.overlay}>
           <div className={styles.container}>
             <ModalHeader headerText={headerText} />
-            <div
-              style={{
-                marginTop: sectionMarginTop,
-                marginBottom: sectionMarginBottom,
-              }}
-              className={styles.content}
-            >
+            <div className={`${styles.content} ${customModalContentStyle}`}>
               {children}
             </div>
             <Button onClick={buttonClick}>{buttonText}</Button>
