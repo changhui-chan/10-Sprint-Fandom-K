@@ -1,6 +1,10 @@
 import styles from './Avatar.module.scss';
 
-const Avatar = ({ src = '', alt = '아바타 이미지', customImageStyle }) => {
+const Avatar = ({
+  src = './src/assets/images/img-default-avatar.svg',
+  alt = '아바타 이미지',
+  customImageStyle,
+}) => {
   return (
     <img
       src={src}
