@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    color: variables.$white;
+    text-align: center;
+
+    font: {
+      size: 18px;
+      weight: 500;
+      line-height: normal;
+    }
+  }
+}
