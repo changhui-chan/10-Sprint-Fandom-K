@@ -1,6 +1,6 @@
 import creditIcon from '@/assets/images/credit.svg';
-import Button from '../Button';
-import styles from './index.module.scss';
+import Button from './Button';
+import styles from './Card.module.scss';
 
 const Card = ({
   idolImg,
