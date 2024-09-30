@@ -1,0 +1,33 @@
+.idolList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0;
+  padding: 10px 30px;
+}
+
+.idolListItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+  border-bottom: 1px solid variables.$light-gray;
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+.idolFirstSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.idolGandN {
+  display: flex;
+  gap: 3px;
+}
+
+.idolVote {
+  color: variables.$light-gray;
+}

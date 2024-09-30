@@ -1,0 +1,35 @@
+.chartPage {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.chartHeader {
+  position: relative;
+  width: 100%;
+}
+
+.chartHead1 {
+  size: cover;
+  width: 100%;
+  object-position: top;
+}
+
+.mainTitle {
+  color: variables.$white;
+}
+
+.chartInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+
+  top: 10px;
+  margin-bottom: 10px;
+  padding: 0 20px;
+  z-index: 4;
+}
+
+.genderSelect {
+  width: 100%;
+}
