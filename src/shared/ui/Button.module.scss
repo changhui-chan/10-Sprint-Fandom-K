@@ -1,0 +1,12 @@
+.button {
+  background: linear-gradient(45deg, variables.$orange, variables.$pink);
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 26px;
+  color: #ffffff;
+}
+
+.button:disabled {
+  background: variables.$gray;
+}
