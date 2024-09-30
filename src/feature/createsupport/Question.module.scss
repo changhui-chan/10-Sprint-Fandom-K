@@ -1,0 +1,51 @@
+.question {
+  display: flex;
+  flex-direction: column;
+}
+
+.question_text {
+  color: variables.$white;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-bottom: 12px;
+}
+
+.question_ex {
+  color: variables.$gray;
+  font-size: 14px;
+  line-height: 18px;
+  padding: 0 0 0 12px;
+  margin-top: 8px;
+}
+
+.field {
+  font-size: 16px;
+  color: variables.$white;
+  line-height: 24px;
+
+  padding: 10px 16px;
+  border-radius: 10px;
+  border-color: variables.$white;
+  border-style: solid;
+  border-width: 1px;
+
+  :focus,
+  :hover {
+    border-color: variables.$pink;
+  }
+
+  ::placeholder {
+    color: variables.$light-gray;
+  }
+}
+
+.idolquestion {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.idolquestion > .field {
+  width: 33%;
+}
