@@ -3,6 +3,7 @@ import Button from '@/shared/ui/Button';
 import styles from './CreateSupportForm.module.scss';
 import Question from './Question';
 import QuestionIdol from './QuestionIdol';
+import QuestionDate from './QuestionDate';
 
 const CreateSupportForm = () => {
   const [gender, setGender] = useState('');
@@ -29,9 +30,12 @@ const CreateSupportForm = () => {
   const handleSubtitleChange = (e) => {
     setSubtitle(e.target.value);
   };
-  const handleDeadlineChange = (e) => {
-    // 컴포넌트 적용x 버전, 나눠서 커밋할 예쩡
-    setDeadline(e.target.value);
+  const handleDeadlineChange = (value, dateString) => {
+    // POST 전 날짜 형식 맞추기 필요
+    // 2024-10-10 18:00:00 -> 2024-10-10T18:00:00Z
+    console.log('Selected Time: ', value);
+    console.log('Formatted Selected Time: ', dateString);
+    setDeadline(dateString);
   };
   const handleTargetDonationChange = (e) => {
     setTargetDonation(e.target.value);
@@ -86,7 +90,7 @@ const CreateSupportForm = () => {
           value={subtitle}
           handleValueChange={handleSubtitleChange}
         />
-        <Question
+        <QuestionDate
           data="deadline"
           value={deadline}
           handleValueChange={handleDeadlineChange}

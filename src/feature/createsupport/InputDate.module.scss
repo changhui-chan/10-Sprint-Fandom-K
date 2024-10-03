@@ -1,0 +1,48 @@
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  color: variables.$white;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.field {
+  font-family:
+    Pretendard Variable,
+    Pretendard,
+    sans-serif;
+  font-size: 16px;
+  color: variables.$white;
+  line-height: 24px;
+
+  padding: 10px 16px;
+  border-radius: 10px;
+  border-color: variables.$white;
+  border-style: solid;
+  border-width: 1px;
+  background: none;
+}
+
+.field:hover,
+.field:focus,
+.field:focus-within {
+  border-color: variables.$pink;
+  background: none;
+  color: variables.$white;
+}
+
+.field input {
+  font-size: 16px !important;
+  color: variables.$white !important;
+}
+
+.field input::placeholder {
+  color: variables.$light-gray !important;
+}
+
+.field svg {
+  fill: variables.$white;
+}
