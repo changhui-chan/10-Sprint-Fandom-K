@@ -8,7 +8,7 @@ export const formatDate = (date) =>
     .replace(/\.$/, '');
 
 export const getRamainingDays = (date) => {
-  const today = new Date('2024-10-12');
+  const today = new Date();
   const targetDate = new Date(date);
 
   const diffMs = targetDate - today;
