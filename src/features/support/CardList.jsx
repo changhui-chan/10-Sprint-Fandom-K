@@ -1,7 +1,10 @@
 import { useRef, useEffect, useCallback, useMemo } from 'react';
 import Card from '@/shared/ui/Card';
+import useModalStore from '@/shared/ui/modal/useModalStore';
 import leftIcon from '@/assets/images/btn-pagination-left.svg';
 import rightIcon from '@/assets/images/btn-pagination-right.svg';
+import caculateProgress from '@/shared/utils/caculateProgress';
+import { getRamainingDays } from '@/shared/utils/formatDate';
 import useCarouselStore from './useCarouselStore';
 import styles from './CardList.module.scss';
 
@@ -23,6 +26,8 @@ const CardList = ({ supports }) => {
     itemWidth,
     setItemWidth,
   } = useCarouselStore();
+
+  const { openModal } = useModalStore();
 
   const maxIndex = useMemo(() => {
     return supports.length - slidesToShow;
@@ -112,11 +117,16 @@ const CardList = ({ supports }) => {
     setTranslateX(caculateTranslateX(index));
   };
 
+  const handleButtonClick = (id, image, title, subtitle) => {
+    openModal({ id, image, title, subtitle });
+  };
+
   const handleTouchStart = (e) =>
-    handleStart(e.clientX || e.touches[0].clientX);
-  const handleTouchMove = (e) => handleMove(e.clientX || e.touches[0].clientX);
+    handleStart(e?.clientX || e?.touches[0].clientX);
+  const handleTouchMove = (e) =>
+    handleMove(e?.clientX || e?.touches[0].clientX);
   const handleTouchEnd = (e) =>
-    handleEnd(e.clientX || e.changedTouches[0].clientX);
+    handleEnd(e?.clientX || e?.changedTouches[0].clientX);
 
   return supports.length ? (
     <div className={styles.wrapper}>
@@ -142,15 +152,35 @@ const CardList = ({ supports }) => {
           style={{ transform: `translateX(${translateX}px)` }}
         >
           {supports.map(
-            ({ id, idol, title, subtitle, targetDonation, deadline }) => {
+            ({
+              id,
+              idol,
+              title,
+              subtitle,
+              receivedDonations,
+              targetDonation,
+              deadline,
+            }) => {
               return (
                 <li key={id} className={styles.card}>
                   <Card
                     idolImg={idol.profilePicture}
                     title={title}
                     subtitle={subtitle}
-                    received={targetDonation.toLocaleString()}
-                    deadline={deadline}
+                    target={targetDonation.toLocaleString()}
+                    deadline={getRamainingDays(deadline)}
+                    progress={caculateProgress(
+                      receivedDonations,
+                      targetDonation
+                    )}
+                    onButtonClick={() =>
+                      handleButtonClick(
+                        id,
+                        idol.profilePicture,
+                        title,
+                        subtitle
+                      )
+                    }
                   />
                 </li>
               );

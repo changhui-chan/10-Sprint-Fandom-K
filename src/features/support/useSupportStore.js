@@ -17,6 +17,24 @@ const useSupportStore = create((set) => ({
       set({ isLoading: false });
     }
   },
+  contributeSupport: async (id, amount) => {
+    set({ error: null });
+    try {
+      const { data } = await fetchData(
+        `${URL_DONATIONS}${id}/contribute`,
+        '',
+        'PUT',
+        { amount }
+      );
+      set((state) => ({
+        supports: state.supports.map((support) =>
+          support.id === id ? { ...support, ...data } : support
+        ),
+      }));
+    } catch (error) {
+      set({ error: error.message });
+    }
+  },
 }));
 
 export default useSupportStore;
