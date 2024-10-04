@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import getIdols from '@/shared/api/listApi';
+import getIdols from '../../listApi';
 import styles from './IdolImage.module.scss';
 
 const IdolImage = ({ gender }) => {
