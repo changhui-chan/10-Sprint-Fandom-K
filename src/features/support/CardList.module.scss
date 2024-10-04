@@ -1,0 +1,52 @@
+.wrapper {
+  position: relative;
+  max-width: 1200px;
+}
+
+.container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.button {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+
+  &:disabled {
+    display: none;
+  }
+}
+
+.left {
+  left: -80px;
+}
+
+.right {
+  right: -80px;
+}
+
+.cardList {
+  display: flex;
+  flex-wrap: nowrap;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card {
+  width: 25%;
+  flex: 0 0 300px;
+  padding: 0 12px;
+}
+
+@media screen and (max-width: 1199px) {
+  .button {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .card {
+    padding: 0 4px;
+    flex: 0 0 160px;
+  }
+}
