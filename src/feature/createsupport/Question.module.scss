@@ -29,15 +29,32 @@
   border-color: variables.$white;
   border-style: solid;
   border-width: 1px;
+}
 
-  :focus,
-  :hover {
-    border-color: variables.$pink;
-  }
+.field:focus {
+  border-color: variables.$pink;
+  outline: none;
+}
 
-  ::placeholder {
-    color: variables.$light-gray;
-  }
+.field::placeholder {
+  color: variables.$light-gray;
+}
+
+.field_notvalid {
+  border-color: variables.$pink;
+}
+
+.errmsg_valid {
+  display: none;
+}
+
+.errmsg_notvalid {
+  color: variables.$pink;
+  font-size: 14px;
+  line-height: 18px;
+  padding: 0 0 0 12px;
+  margin-top: 4px;
+  margin-bottom: -4px;
 }
 
 .idolquestion {

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import dayjs from 'dayjs';
 import Button from '@/shared/ui/Button';
 import styles from './CreateSupportForm.module.scss';
 import Question from './Question';
@@ -12,7 +13,14 @@ const CreateSupportForm = () => {
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [deadline, setDeadline] = useState('');
-  const [targetDonation, setTargetDonation] = useState('');
+  const [targetDonation, setTargetDonation] = useState(0);
+  const [isValid, setIsValid] = useState({
+    idolId: true,
+    title: true,
+    subtitle: true,
+    deadline: true,
+    targetDonation: true,
+  });
 
   const handleGenderChange = (e) => {
     setGender(e.target.value);
@@ -25,20 +33,76 @@ const CreateSupportForm = () => {
   };
 
   const handleTitleChange = (e) => {
-    setTitle(e.target.value);
+    if (e.target.value === '') {
+      setTitle(e.target.value);
+      setIsValid((prevValues) => ({
+        ...prevValues,
+        title: false,
+      }));
+    } else {
+      setTitle(e.target.value);
+      setIsValid((prevValues) => ({
+        ...prevValues,
+        title: true,
+      }));
+    }
   };
+
   const handleSubtitleChange = (e) => {
-    setSubtitle(e.target.value);
+    if (e.target.value === '') {
+      setSubtitle(e.target.value);
+      setIsValid((prevValues) => ({
+        ...prevValues,
+        subtitle: false,
+      }));
+    } else {
+      setSubtitle(e.target.value);
+      setIsValid((prevValues) => ({
+        ...prevValues,
+        subtitle: true,
+      }));
+    }
   };
+
   const handleDeadlineChange = (value, dateString) => {
-    // POST 전 날짜 형식 맞추기 필요
-    // 2024-10-10 18:00:00 -> 2024-10-10T18:00:00Z
     console.log('Selected Time: ', value);
     console.log('Formatted Selected Time: ', dateString);
-    setDeadline(dateString);
+
+    // dayjs 객체를 비교, 오늘 날짜보다 뒤면 true, 아니면 flase 반환
+    const isValidDate = dayjs().isBefore(value, 'day');
+
+    if (isValidDate) {
+      setDeadline(dateString);
+      setIsValid((prevValues) => ({
+        ...prevValues,
+        deadline: true,
+      }));
+    } else {
+      setDeadline(dateString);
+      setIsValid((prevValues) => ({
+        ...prevValues,
+        deadline: false,
+      }));
+    }
   };
+
   const handleTargetDonationChange = (e) => {
-    setTargetDonation(e.target.value);
+    const target = e.target.value;
+    const i = Number(target.replaceAll(',', ''));
+
+    if (Number.isNaN(i)) {
+      setTargetDonation(0);
+      setIsValid((prevValues) => ({
+        ...prevValues,
+        targetDonation: false,
+      }));
+    } else {
+      setTargetDonation(i.toLocaleString('ko-KR'));
+      setIsValid((prevValues) => ({
+        ...prevValues,
+        targetDonation: true,
+      }));
+    }
   };
 
   const handleSubmit = (e) => {
@@ -58,6 +122,12 @@ const CreateSupportForm = () => {
     console.log(result);
   };
 
+  const handleCantSubmit = (e) => {
+    e.preventDefault();
+    // 제출 막았을때 동작 추가할건지
+    console.log('message: Cant Submit (Invalid Input)');
+  };
+
   const handleReset = () => {
     setGender('');
     setGroup('');
@@ -69,7 +139,14 @@ const CreateSupportForm = () => {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form
+      className={styles.form}
+      onSubmit={
+        Object.values(isValid).every((el) => el === true)
+          ? handleSubmit
+          : handleCantSubmit
+      }
+    >
       <div className={styles.questions}>
         <QuestionIdol
           data="idol"
@@ -82,21 +159,25 @@ const CreateSupportForm = () => {
         />
         <Question
           data="title"
+          isValid={isValid}
           value={title}
           handleValueChange={handleTitleChange}
         />
         <Question
           data="subtitle"
+          isValid={isValid}
           value={subtitle}
           handleValueChange={handleSubtitleChange}
         />
         <QuestionDate
           data="deadline"
+          isValid={isValid}
           value={deadline}
           handleValueChange={handleDeadlineChange}
         />
         <Question
-          data="targetdonation"
+          data="targetDonation"
+          isValid={isValid}
           value={targetDonation}
           handleValueChange={handleTargetDonationChange}
         />
