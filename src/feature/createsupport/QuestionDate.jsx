@@ -8,16 +8,14 @@ const QuestionDate = ({ data, isValid, value, handleValueChange }) => {
 
   return (
     <div className={styles.question}>
-      <p className={styles.question_text}>{QUESTIONS[questionQuery]}</p>
+      <p className={styles.questionText}>{QUESTIONS[questionQuery]}</p>
       <InputDate
         data={data}
         isValid={isValid}
         value={value}
         handleValueChange={handleValueChange}
       />
-      <p
-        className={isValid[data] ? styles.errmsg_valid : styles.errmsg_notvalid}
-      >
+      <p className={isValid[data] ? styles.errmsgValid : styles.errmsgNotvalid}>
         {QUESTIONS[errQuery]}
       </p>
     </div>

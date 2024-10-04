@@ -8,22 +8,20 @@ const Question = ({ data, isValid, value, handleValueChange }) => {
 
   return (
     <div className={styles.question}>
-      <p className={styles.question_text}>{QUESTIONS[questionQuery]}</p>
+      <p className={styles.questionText}>{QUESTIONS[questionQuery]}</p>
       <input
         className={
           isValid[data]
             ? `${styles.field}`
-            : `${styles.field} ${styles.field_notvalid}`
+            : `${styles.field} ${styles.fieldNotvalid}`
         }
         value={value}
         onChange={handleValueChange}
       ></input>
-      <p
-        className={isValid[data] ? styles.errmsg_valid : styles.errmsg_notvalid}
-      >
+      <p className={isValid[data] ? styles.errmsgValid : styles.errmsgNotvalid}>
         {QUESTIONS[errQuery]}
       </p>
-      <p className={styles.question_ex}>예시: {QUESTIONS[exampleQuery]}</p>
+      <p className={styles.questionEx}>예시: {QUESTIONS[exampleQuery]}</p>
     </div>
   );
 };

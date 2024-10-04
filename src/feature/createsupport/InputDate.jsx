@@ -11,7 +11,7 @@ const InputDate = ({ data, isValid, value, handleValueChange }) => {
       className={
         isValid[data]
           ? `${styles.field}`
-          : `${styles.field} ${styles.field_notvalid}`
+          : `${styles.field} ${styles.fieldNotvalid}`
       }
       placeholder={QUESTIONS[exampleQuery]}
       onChange={handleValueChange}

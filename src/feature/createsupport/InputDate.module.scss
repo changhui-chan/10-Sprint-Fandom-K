@@ -24,14 +24,18 @@
   border-style: solid;
   border-width: 1px;
   background: none;
+
+  &:hover,
+  &:focus,
+  &:focus-within {
+    border-color: variables.$pink;
+    background: none;
+    color: variables.$white;
+  }
 }
 
-.field:hover,
-.field:focus,
-.field:focus-within {
+.fieldNotvalid {
   border-color: variables.$pink;
-  background: none;
-  color: variables.$white;
 }
 
 .field input {

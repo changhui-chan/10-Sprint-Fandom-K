@@ -8,7 +8,7 @@ const QuestionIdol = ({ data, value, handleValueChange }) => {
   const questionQuery = data.toUpperCase();
   return (
     <div className={styles.question}>
-      <p className={styles.question_text}>{QUESTIONS[questionQuery]}</p>
+      <p className={styles.questionText}>{QUESTIONS[questionQuery]}</p>
       <div className={styles.idolquestion}>
         <input
           className={styles.field}
