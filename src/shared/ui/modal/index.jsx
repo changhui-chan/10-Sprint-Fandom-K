@@ -8,8 +8,12 @@ const Modal = ({
   headerText = '',
   footerElement = null,
   children = null,
-  customModalContentStyle = {},
+  customModalContainerStyle = '',
+  customModalContentStyle = '',
+  customModalButtonStyle = '',
   buttonText = '확인',
+  disabled = false,
+  onClose = () => {},
   buttonClick = () => {},
 }) => {
   const { isVisible } = useModalStore();
@@ -18,12 +22,18 @@ const Modal = ({
     <div>
       {isVisible && (
         <div className={styles.overlay}>
-          <div className={styles.container}>
-            <ModalHeader headerText={headerText} />
+          <div className={`${styles.container} ${customModalContainerStyle}`}>
+            <ModalHeader headerText={headerText} onClose={onClose} />
             <div className={`${styles.content} ${customModalContentStyle}`}>
               {children}
             </div>
-            <Button onClick={buttonClick}>{buttonText}</Button>
+            <Button
+              onClick={buttonClick}
+              className={customModalButtonStyle}
+              disabled={disabled}
+            >
+              {buttonText}
+            </Button>
             <ModalFooter footerElement={footerElement} />
           </div>
         </div>
