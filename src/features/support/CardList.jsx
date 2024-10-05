@@ -1,31 +1,21 @@
-import { useRef, useEffect, useCallback, useMemo } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import Card from '@/shared/ui/Card';
 import useModalStore from '@/shared/ui/modal/useModalStore';
 import leftIcon from '@/assets/images/btn-pagination-left.svg';
 import rightIcon from '@/assets/images/btn-pagination-right.svg';
 import caculateProgress from '@/shared/utils/caculateProgress';
-import { getRamainingDays } from '@/shared/utils/formatDate';
-import useCarouselStore from './useCarouselStore';
+import { formatDate, getRamainingDays } from '@/shared/utils/formatDate';
 import styles from './CardList.module.scss';
 
-const CardList = ({ supports }) => {
+const CardList = ({ supports, type = '' }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [slidesToShow, setSlidesToShow] = useState(4);
+  const [translateX, setTranslateX] = useState(0);
+  const [startX, setStartX] = useState(0);
+  const [initialPosition, setInitialPosition] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [itemWidth, setItemWidth] = useState(300);
   const carouselRef = useRef(null);
-  const {
-    currentIndex,
-    setCurrentIndex,
-    slidesToShow,
-    setSlidesToShow,
-    translateX,
-    setTranslateX,
-    startX,
-    setStartX,
-    initialPosition,
-    setInitialPosition,
-    isDragging,
-    setIsDragging,
-    itemWidth,
-    setItemWidth,
-  } = useCarouselStore();
 
   const { openModal } = useModalStore();
 
@@ -122,11 +112,11 @@ const CardList = ({ supports }) => {
   };
 
   const handleTouchStart = (e) =>
-    handleStart(e?.clientX || e?.touches[0].clientX);
+    handleStart(e.clientX || e.touches?.[0].clientX);
   const handleTouchMove = (e) =>
-    handleMove(e?.clientX || e?.touches[0].clientX);
+    handleMove(e.clientX || e.touches?.[0].clientX);
   const handleTouchEnd = (e) =>
-    handleEnd(e?.clientX || e?.changedTouches[0].clientX);
+    handleEnd(e.clientX || e.changedTouches?.[0].clientX);
 
   return supports.length ? (
     <div className={styles.wrapper}>
@@ -168,7 +158,7 @@ const CardList = ({ supports }) => {
                     title={title}
                     subtitle={subtitle}
                     target={targetDonation.toLocaleString()}
-                    deadline={getRamainingDays(deadline)}
+                    deadline={formatDate(deadline)}
                     progress={caculateProgress(
                       receivedDonations,
                       targetDonation
@@ -181,7 +171,19 @@ const CardList = ({ supports }) => {
                         subtitle
                       )
                     }
-                  />
+                  >
+                    {type === 'hot' && (
+                      <div className={styles.key}>
+                        {caculateProgress(receivedDonations, targetDonation)}%
+                        달성
+                      </div>
+                    )}
+                    {type === 'deadline' && (
+                      <div className={styles.key}>
+                        {getRamainingDays(deadline)}
+                      </div>
+                    )}
+                  </Card>
                 </li>
               );
             }
