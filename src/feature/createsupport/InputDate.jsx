@@ -1,5 +1,5 @@
 import { DatePicker } from 'antd';
-import QUESTIONS from '@/shared/constant/QUESTIONS';
+import { QUESTIONS } from '@/shared/constant/QUESTIONS';
 import styles from './InputDate.module.scss';
 
 const InputDate = ({ data, isValid, value, handleValueChange }) => {

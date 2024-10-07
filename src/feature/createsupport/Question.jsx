@@ -1,4 +1,4 @@
-import QUESTIONS from '@/shared/constant/QUESTIONS';
+import { QUESTIONS } from '@/shared/constant/QUESTIONS';
 import styles from './Question.module.scss';
 
 const Question = ({ data, isValid, value, handleValueChange }) => {

@@ -1,4 +1,4 @@
-import QUESTIONS from '@/shared/constant/QUESTIONS';
+import { QUESTIONS } from '@/shared/constant/QUESTIONS';
 import InputDate from './InputDate';
 import styles from './Question.module.scss';
 

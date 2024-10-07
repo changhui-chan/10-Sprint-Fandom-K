@@ -1,15 +1,17 @@
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import Button from '@/shared/ui/Button';
+import { IDOL_EX } from '@/shared/constant/QUESTIONS';
 import styles from './CreateSupportForm.module.scss';
 import Question from './Question';
 import QuestionIdol from './QuestionIdol';
 import QuestionDate from './QuestionDate';
 
 const CreateSupportForm = () => {
-  const [gender, setGender] = useState('');
-  const [group, setGroup] = useState('');
-  const [member, setMember] = useState('');
+  const [gender, setGender] = useState(`${IDOL_EX.GENDER}`);
+  const [group, setGroup] = useState(`${IDOL_EX.GROUP}`);
+  const [member, setMember] = useState(`${IDOL_EX.MEMBER}`);
+  const [idolId, setIdolId] = useState('');
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [deadline, setDeadline] = useState('');
@@ -22,14 +24,36 @@ const CreateSupportForm = () => {
     targetDonation: true,
   });
 
+  const handelIdolIdChange = () => {
+    // group이랑 member 값으로 api 요청, id 세팅하기
+    setIdolId(1111);
+  };
+
   const handleGenderChange = (e) => {
     setGender(e.target.value);
+    setGroup(`${IDOL_EX.GROUP}`);
+    setMember(`${IDOL_EX.MEMBER}`);
+    setIsValid((prevValues) => ({
+      ...prevValues,
+      idolId: false,
+    }));
   };
   const handleGroupChange = (e) => {
     setGroup(e.target.value);
+    setMember(`${IDOL_EX.MEMBER}`);
+    setIsValid((prevValues) => ({
+      ...prevValues,
+      idolId: false,
+    }));
   };
+
   const handleMemberChange = (e) => {
     setMember(e.target.value);
+    handelIdolIdChange();
+    setIsValid((prevValues) => ({
+      ...prevValues,
+      idolId: true,
+    }));
   };
 
   const handleTitleChange = (e) => {
@@ -65,9 +89,6 @@ const CreateSupportForm = () => {
   };
 
   const handleDeadlineChange = (value, dateString) => {
-    console.log('Selected Time: ', value);
-    console.log('Formatted Selected Time: ', dateString);
-
     // dayjs 객체를 비교, 오늘 날짜보다 뒤면 true, 아니면 flase 반환
     const isValidDate = dayjs().isBefore(value, 'day');
 
@@ -107,8 +128,6 @@ const CreateSupportForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 3개입력 조합해서 idol id 찾기
-    const idolId = 1111;
 
     const result = {
       deadline: { deadline },
@@ -129,13 +148,21 @@ const CreateSupportForm = () => {
   };
 
   const handleReset = () => {
-    setGender('');
-    setGroup('');
-    setMember('');
+    setGender(`${IDOL_EX.GENDER}`);
+    setGroup(`${IDOL_EX.GROUP}`);
+    setMember(`${IDOL_EX.MEMBER}`);
+    setIdolId('');
     setTitle('');
     setSubtitle('');
     setTargetDonation('');
     setDeadline('');
+    setIsValid({
+      idolId: true,
+      title: true,
+      subtitle: true,
+      deadline: true,
+      targetDonation: true,
+    });
   };
 
   return (
@@ -150,12 +177,13 @@ const CreateSupportForm = () => {
       <div className={styles.questions}>
         <QuestionIdol
           data="idol"
-          value={[gender, group, member]}
-          handleValueChange={[
+          isValid
+          value={{ gender, group, member }}
+          handleValueChange={{
             handleGenderChange,
             handleGroupChange,
             handleMemberChange,
-          ]}
+          }}
         />
         <Question
           data="title"
