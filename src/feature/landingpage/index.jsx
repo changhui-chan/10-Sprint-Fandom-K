@@ -62,8 +62,8 @@ const LandingPage = () => {
           <div className={styles.frontContain}>
             <div className={styles.titleContain2}>
               <p className={styles.subTitle}>나만의 아티스트</p>
-              <h1 className={styles.title}>좋아하는 아티스트들의</h1>
-              <h1 className={styles.title}>소식을 모아보세요</h1>
+              <h3 className={styles.title}>좋아하는 아티스트들의</h3>
+              <h3 className={styles.title}>소식을 모아보세요</h3>
             </div>
             <img src={Home3} alt="home3" className={styles.homeComponent} />
           </div>
