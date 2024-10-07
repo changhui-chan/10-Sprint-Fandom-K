@@ -1,0 +1,55 @@
+.idolListItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+
+  &:hover {
+    background-color: variables.$dark-gray;
+  }
+}
+
+.idolFirstSection {
+  display: flex;
+  align-items: center;
+}
+
+.idolGandN {
+  display: flex;
+  gap: 4px;
+}
+
+.idolGandNandV {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.idolVote {
+  font-size: 14px;
+  color: variables.$light-gray;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.radioInput {
+  display: none;
+}
+
+.radioIcon {
+  width: 24px;
+  height: 24px;
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radioIcon img {
+  width: 100%;
+  height: auto;
+}

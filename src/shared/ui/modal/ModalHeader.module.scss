@@ -1,15 +1,18 @@
 .container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   p {
     color: variables.$white;
-    text-align: center;
-
+    line-height: normal;
     font: {
       size: 18px;
       weight: 500;
-      line-height: normal;
     }
+  }
+
+  img {
+    display: block;
   }
 }
