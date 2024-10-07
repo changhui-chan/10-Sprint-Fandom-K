@@ -1,56 +1,50 @@
-import { useState, useEffect } from 'react';
-import IdolSelect from '@/feature/idolchart/components/IdolSelect/IdolSelect';
-import IdolImage from '@/feature/idolchart/components/TopBanner/IdolImage';
-import IdolList from '@/feature/idolchart/components/IdolList/IdolListChart';
-import VoteButton from '@/feature/idolchart/components/VoteButton/VoteButton';
-import LoadMoreComponent from '@/feature/idolchart/components/MoreButton/IdolMore';
-import getIdols from './listApi';
+import { useEffect, useState } from 'react';
+import IdolSelect from '@/feature/idolchart/IdolSelect/IdolSelect';
+import IdolImage from '@/feature/idolchart/TopBanner/IdolImage';
+import IdolList from '@/feature/idolchart/IdolList/IdolListChart';
+import LoadMoreComponent from '@/feature/idolchart/MoreButton/IdolMore';
+import VoteButton from '@/feature/idolchart/VoteButton/VoteButton';
+import VoteModal from '@/feature/idolchart/VoteModal/VoteModal';
+import useModalStore from '@/shared/ui/modal/useModalStore';
 import styles from './styles.module.scss';
+import useIdolStore from './useIdolStore';
 
 const ChartPage = () => {
+  const { idols, fetchIdols, topIdol, pageSize, setPageSize } = useIdolStore();
   const [gender, setGender] = useState('female');
-  const [idols, setIdols] = useState([]);
-  const [pageSize, setPageSize] = useState(10);
+  const { isVisible, openModal, closeModal } = useModalStore();
 
   useEffect(() => {
-    const fetchIdols = async () => {
-      try {
-        const fetchedIdols = await getIdols(gender, 1, pageSize);
-        setIdols(fetchedIdols);
-      } catch (error) {
-        console.error('Error fetching idols:', error);
-      }
-    };
+    setPageSize(10);
+    fetchIdols(gender, 10);
+  }, [gender, fetchIdols, setPageSize]);
 
-    fetchIdols();
-  }, [gender, pageSize]);
+  useEffect(() => {
+    fetchIdols(gender, pageSize);
+  }, [gender, pageSize, fetchIdols]);
 
-  const loadMoreIdols = async (newPageSize) => {
-    try {
-      const fetchedIdols = await getIdols(gender, 1, newPageSize);
-      setIdols((prevIdols) => [...prevIdols, ...fetchedIdols]);
-      setPageSize(newPageSize);
-    } catch (error) {
-      console.error('Error fetching more idols:', error);
-    }
+  const loadMoreIdols = async () => {
+    const newPageSize = pageSize + 10;
+    await fetchIdols(gender, newPageSize);
+    setPageSize(newPageSize);
   };
 
   return (
     <div className={styles.chartPage}>
       <div className={styles.chartHeader}>
         <div className={styles.chartHead1}>
-          <IdolImage gender={gender} />
+          {topIdol && <IdolImage idol={topIdol} />}
         </div>
       </div>
       <div className={styles.chartInfo}>
         <h1 className={styles.mainTitle}>이달의 차트</h1>
-        <VoteButton />
+        <VoteButton onClick={openModal} />
       </div>
-      <div className={styles.genderSelect}>
-        <IdolSelect onGenderChange={setGender} />
-      </div>
+      <IdolSelect onGenderChange={setGender} />
       <IdolList items={idols} />
-      <LoadMoreComponent onLoadMore={loadMoreIdols} pageSize={pageSize} />
+      <LoadMoreComponent onLoadMore={loadMoreIdols} />
+
+      {isVisible && <VoteModal items={idols} onClose={closeModal} />}
     </div>
   );
 };
