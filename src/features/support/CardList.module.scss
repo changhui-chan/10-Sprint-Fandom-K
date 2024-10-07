@@ -38,6 +38,23 @@
   padding: 0 12px;
 }
 
+.key {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  border: 1px solid variables.$white;
+  border-radius: 12px;
+  color: #ffffff;
+  margin: 0 auto;
+  padding: 12px 88px;
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
 @media screen and (max-width: 1199px) {
   .button {
     display: none;
@@ -48,5 +65,10 @@
   .card {
     padding: 0 4px;
     flex: 0 0 160px;
+  }
+
+  .key {
+    font-size: 14px;
+    padding: 6px 40px;
   }
 }
