@@ -15,11 +15,11 @@ const LandingPage = () => {
     <div className={styles.allContain}>
       <div className={styles.topContain}>
         <div className={styles.titleContain1}>
-          <h1 className={styles.title}>내가 좋아하는 아이돌을</h1>
+          <h3 className={styles.title}>내가 좋아하는 아이돌을</h3>
           <div className={styles.smtitleContain}>
-            <h1 className={styles.title}>가장&nbsp;</h1>
-            <h1 className={styles.title2}>쉽게 덕질</h1>
-            <h1 className={styles.title}>&nbsp;하는 방법</h1>
+            <h3 className={styles.title}>가장&nbsp;</h3>
+            <h3 className={styles.title2}>쉽게 덕질</h3>
+            <h3 className={styles.title}>&nbsp;하는 방법</h3>
           </div>
           <img src={logo} alt="logo" className={styles.logo} />
         </div>
@@ -34,8 +34,8 @@ const LandingPage = () => {
           <div className={styles.frontContain}>
             <div className={styles.titleContain2}>
               <p className={styles.subTitle}>후원하기</p>
-              <h1 className={styles.title}>좋아하는 아이돌에게</h1>
-              <h1 className={styles.title}>쉽게 후원해보세요</h1>
+              <h3 className={styles.title}>좋아하는 아이돌에게</h3>
+              <h3 className={styles.title}>쉽게 후원해보세요</h3>
             </div>
             <img src={Home1} alt="home1" className={styles.homeComponent} />
           </div>
@@ -48,8 +48,8 @@ const LandingPage = () => {
           <div className={styles.frontContain}>
             <div className={styles.titleContain2}>
               <p className={styles.subTitle}>이달의 아티스트</p>
-              <h1 className={styles.title}>내 아티스트에게</h1>
-              <h1 className={styles.title}>영예를 선물하세요</h1>
+              <h3 className={styles.title}>내 아티스트에게</h3>
+              <h3 className={styles.title}>영예를 선물하세요</h3>
             </div>
             <img src={Home2} alt="home2" className={styles.homeComponent} />
           </div>
@@ -62,8 +62,8 @@ const LandingPage = () => {
           <div className={styles.frontContain}>
             <div className={styles.titleContain2}>
               <p className={styles.subTitle}>나만의 아티스트</p>
-              <h1 className={styles.title}>좋아하는 아티스트들의</h1>
-              <h1 className={styles.title}>소식을 모아보세요</h1>
+              <h3 className={styles.title}>좋아하는 아티스트들의</h3>
+              <h3 className={styles.title}>소식을 모아보세요</h3>
             </div>
             <img src={Home3} alt="home3" className={styles.homeComponent} />
           </div>
