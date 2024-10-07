@@ -18,7 +18,7 @@ const LandingPage = () => {
           <h3 className={styles.title}>내가 좋아하는 아이돌을</h3>
           <div className={styles.smtitleContain}>
             <h3 className={styles.title}>가장&nbsp;</h3>
-            <h3 className={styles.title2}>쉽게 덕질</h3>
+            <h3 className={styles.titleO}>쉽게 덕질</h3>
             <h3 className={styles.title}>&nbsp;하는 방법</h3>
           </div>
           <img src={logo} alt="logo" className={styles.logo} />
