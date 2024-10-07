@@ -1,9 +1,9 @@
 import Modal from '@/shared/ui/modal';
 import creditIcon from '@/assets/images/ic-credit.svg';
 import useModalStore from '@/shared/ui/modal/useModalStore';
-import styles from './index.module.scss';
+import styles from './AlertModal.module.scss';
 
-const LackModal = () => {
+const AlertModal = () => {
   const { removeElement } = useModalStore();
 
   return (
@@ -25,4 +25,4 @@ const LackModal = () => {
   );
 };
 
-export default LackModal;
+export default AlertModal;
