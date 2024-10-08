@@ -1,10 +1,11 @@
 import CreateSupportForm from '@/features/createsupport/CreateSupportForm';
 import styles from '@/pages/createsupport/index.module.scss';
+import Header from '../../shared/layout/Header';
 
 const CreateSupportPage = () => {
   return (
     <div className={styles.background}>
-      <p>헤더 연결 예정</p>
+      <Header />
       <CreateSupportForm />
     </div>
   );

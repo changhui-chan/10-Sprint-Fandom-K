@@ -9,7 +9,7 @@ import useModalStore from '@/shared/ui/modal/useModalStore';
 import styles from './styles.module.scss';
 import useIdolStore from './useIdolStore';
 
-const ChartPage = () => {
+const Chart = () => {
   const { idols, fetchIdols, topIdol, pageSize, setPageSize } = useIdolStore();
   const [gender, setGender] = useState('female');
   const { isVisible, openModal, closeModal } = useModalStore();
@@ -49,4 +49,4 @@ const ChartPage = () => {
   );
 };
 
-export default ChartPage;
+export default Chart;
