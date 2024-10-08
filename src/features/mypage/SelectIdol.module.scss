@@ -1,0 +1,58 @@
+.selecticon {
+  display: flex;
+  align-items: center;
+
+  &__profile {
+    position: relative;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+  }
+}
+
+.profileWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background-color: variables.$pink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  opacity: 0.5;
+}
+
+.checkIcon {
+  width: 40%;
+  height: 40%;
+}
+
+.selectionContain {
+  display: flex;
+  flex-direction: column;
+}
+
+.selectInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.group {
+  font-weight: 400;
+}
+
+.name {
+  font-weight: 700;
+}

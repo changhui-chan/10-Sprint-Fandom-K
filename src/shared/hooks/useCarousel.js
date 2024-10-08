@@ -3,7 +3,8 @@ import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 const useCarousel = (
   itemsLength,
   initialSlidesToShow = 4,
-  initialItemWidth = 300
+  initialItemWidth = 300,
+  mobileWidth = 160
 ) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [slidesToShow, setSlidesToShow] = useState(initialSlidesToShow);
@@ -27,7 +28,7 @@ const useCarousel = (
 
   const handleResize = useCallback(() => {
     const screenWidth = window.innerWidth;
-    const nextItemWidth = screenWidth < 768 ? 160 : 300;
+    const nextItemWidth = screenWidth < 768 ? mobileWidth : initialItemWidth;
     setItemWidth(nextItemWidth);
 
     const visibleSlides = Math.round(
@@ -37,7 +38,13 @@ const useCarousel = (
     );
     setSlidesToShow(visibleSlides);
     setTranslateX(caculateTranslateX(currentIndex));
-  }, [currentIndex, caculateTranslateX, initialSlidesToShow]);
+  }, [
+    currentIndex,
+    caculateTranslateX,
+    initialSlidesToShow,
+    mobileWidth,
+    initialItemWidth,
+  ]);
 
   useEffect(() => {
     handleResize();
@@ -73,7 +80,7 @@ const useCarousel = (
     const movement = clientX - startXRef.current;
     const threshold = itemWidth / 4;
 
-    if (translateX > 0) {
+    if (translateX > 0 || maxTranslateX === 0) {
       setCurrentIndex(0);
       setTranslateX(0);
     } else if (translateX - threshold < maxTranslateX) {
