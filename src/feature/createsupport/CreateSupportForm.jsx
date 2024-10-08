@@ -138,13 +138,13 @@ const CreateSupportForm = () => {
     };
     // 변경 예정
     // POST 보내기, 통합 fetch 이용
-    console.log(result);
+    // console.log(result);
   };
 
   const handleCantSubmit = (e) => {
     e.preventDefault();
     // 제출 막았을때 동작 추가할건지
-    console.log('message: Cant Submit (Invalid Input)');
+    // console.log('message: Cant Submit (Invalid Input)');
   };
 
   const handleReset = () => {
