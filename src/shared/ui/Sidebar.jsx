@@ -4,13 +4,28 @@ import homeIcon from '@/assets/images/ic-home.svg';
 import starIcon from '@/assets/images/ic-star.svg';
 import rankIcon from '@/assets/images/ic-rank.svg';
 import forwardIcon from '@/assets/images/ic-forward.svg';
+import { useEffect } from 'react';
 import Avatar from './Avatar';
 import Logo from './Logo';
 import styles from './Sidebar.module.scss';
 import { useSidebarStore } from './useSidebar';
 
 const Sidebar = () => {
-  const { isOpen, toggle } = useSidebarStore();
+  const { isOpen, closeSidebar } = useSidebarStore();
+
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        closeSidebar();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [closeSidebar]);
 
   return (
     <div>
@@ -19,7 +34,7 @@ const Sidebar = () => {
           <div className={styles.container}>
             <div className={styles.header}>
               <Logo customLogoStyle={styles.logo} />
-              <button onClick={toggle}>
+              <button onClick={closeSidebar}>
                 <img src={deleteIcon} alt="닫기 버튼" />
               </button>
             </div>
@@ -34,7 +49,11 @@ const Sidebar = () => {
                   <ul>
                     <li>
                       <img src={homeIcon} alt="홈 아이콘" />
-                      <Link to="/" className={styles.link} onClick={toggle}>
+                      <Link
+                        to="/"
+                        className={styles.link}
+                        onClick={closeSidebar}
+                      >
                         <p>메인 페이지</p>
                         <img src={forwardIcon} alt="화살표 아이콘" />
                       </Link>
@@ -44,7 +63,7 @@ const Sidebar = () => {
                       <Link
                         to="/support"
                         className={styles.link}
-                        onClick={toggle}
+                        onClick={closeSidebar}
                       >
                         <p>후원하기</p>
                         <img src={forwardIcon} alt="화살표 아이콘" />
@@ -55,7 +74,7 @@ const Sidebar = () => {
                       <Link
                         to="/chart"
                         className={styles.link}
-                        onClick={toggle}
+                        onClick={closeSidebar}
                       >
                         <p>차트</p>
                         <img src={forwardIcon} alt="화살표 아이콘" />

@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.user {
+  display: flex;
+  gap: 6px;
+}
+
+@media screen and (max-width: 1199px) {
+  .container {
+    width: 100%;
+    padding: 0 24px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    max-width: 400px;
+  }
+}
