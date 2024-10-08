@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Home1 from '@/assets/images/img-home1.svg';
 import Home2 from '@/assets/images/img-home2.svg';
 import Home3 from '@/assets/images/img-home3.svg';
@@ -11,6 +12,12 @@ import EnterButton from './enterbutton/EnterButton';
 import styles from './styles.module.scss';
 
 const Landing = () => {
+  const navigate = useNavigate();
+
+  const handleButtonClick = async () => {
+    navigate('/chart');
+  };
+
   return (
     <div className={styles.allContain}>
       <div className={styles.topContain}>
@@ -21,7 +28,16 @@ const Landing = () => {
             <h3 className={styles.title2}>쉽게 덕질</h3>
             <h3 className={styles.title}>&nbsp;하는 방법</h3>
           </div>
-          <img src={logo} alt="logo" className={styles.logo} />
+          <button
+            onClick={handleButtonClick}
+            style={{
+              border: 'none',
+              background: 'transparent',
+              cursor: 'pointer',
+            }}
+          >
+            <img src={logo} alt="logo" className={styles.logo} />
+          </button>
         </div>
         <img src={topPhoto} alt="topphoto" className={styles.topPhoto} />
         <div className={styles.buttonContain}>
@@ -75,4 +91,5 @@ const Landing = () => {
     </div>
   );
 };
+
 export default Landing;
