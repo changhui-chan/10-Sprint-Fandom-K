@@ -8,11 +8,17 @@ import VoteModal from '@/features/idolchart/VoteModal/VoteModal';
 import useModalStore from '@/shared/ui/modal/useModalStore';
 import styles from './styles.module.scss';
 import useIdolStore from './useIdolStore';
+import useFullIdolStore from './useFullStore';
 
 const Chart = () => {
+  const { fullIdols, fetchAllIdols } = useFullIdolStore();
   const { idols, fetchIdols, topIdol, pageSize, setPageSize } = useIdolStore();
   const [gender, setGender] = useState('female');
   const { isVisible, openModal, closeModal } = useModalStore();
+
+  useEffect(() => {
+    fetchAllIdols(gender);
+  }, [gender, fetchAllIdols]);
 
   useEffect(() => {
     setPageSize(10);
@@ -44,7 +50,9 @@ const Chart = () => {
       <IdolList items={idols} />
       <LoadMoreComponent onLoadMore={loadMoreIdols} />
 
-      {isVisible && <VoteModal items={idols} onClose={closeModal} />}
+      {isVisible && (
+        <VoteModal items={fullIdols} onClose={closeModal} gender={gender} />
+      )}
     </div>
   );
 };

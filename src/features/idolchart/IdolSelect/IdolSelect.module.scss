@@ -21,4 +21,13 @@
   &:hover {
     background-color: variables.$dark-gray;
   }
+  @media (max-width: 768px) {
+    font-size: 15px;
+    height: 40px;
+  }
+
+  @media (max-width: 400px) {
+    font-size: 13px;
+    height: 38px;
+  }
 }

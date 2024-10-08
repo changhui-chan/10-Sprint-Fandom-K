@@ -7,6 +7,12 @@
   &:hover {
     background-color: variables.$dark-gray;
   }
+  @media (max-width: 768px) {
+    padding: 8px 10px;
+  }
+  @media (max-width: 400px) {
+    padding: 5px 8px;
+  }
 }
 
 .idolFirstSection {
@@ -17,17 +23,33 @@
 .idolGandN {
   display: flex;
   gap: 4px;
+  @media (max-width: 768px) {
+    gap: 3px;
+  }
 }
 
 .idolGandNandV {
   display: flex;
   flex-direction: column;
   margin-left: 10px;
+
+  @media (max-width: 768px) {
+    margin-left: 8px;
+  }
+  @media (max-width: 400px) {
+    margin-left: 6px;
+  }
 }
 
 .idolVote {
   font-size: 14px;
   color: variables.$light-gray;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+  @media (max-width: 400px) {
+    font-size: 10px;
+  }
 }
 
 .radioLabel {
@@ -47,6 +69,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 768px) {
+    width: 20px;
+    height: 20px;
+    margin-left: 4px;
+  }
+  @media (max-width: 400px) {
+    width: 18px;
+    height: 18px;
+    margin-left: 3px;
+  }
 }
 
 .radioIcon img {
