@@ -10,7 +10,7 @@ import topPhoto from '@/assets/images/img-landing.svg';
 import EnterButton from './enterbutton/EnterButton';
 import styles from './styles.module.scss';
 
-const LandingPage = () => {
+const Landing = () => {
   return (
     <div className={styles.allContain}>
       <div className={styles.topContain}>
@@ -75,4 +75,4 @@ const LandingPage = () => {
     </div>
   );
 };
-export default LandingPage;
+export default Landing;
