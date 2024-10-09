@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import IdolSelect from '@/features/idolchart/IdolSelect/IdolSelect';
 import IdolImage from '@/features/idolchart/TopBanner/IdolImage';
 import IdolList from '@/features/idolchart/IdolList/IdolListChart';
@@ -29,6 +29,12 @@ const Chart = () => {
     fetchIdols(gender, pageSize);
   }, [gender, pageSize, fetchIdols]);
 
+  const handleModalClose = async () => {
+    await fetchIdols(gender, pageSize);
+    await fetchAllIdols(gender);
+    closeModal();
+  };
+
   const loadMoreIdols = async () => {
     const newPageSize = pageSize + 10;
     await fetchIdols(gender, newPageSize);
@@ -51,7 +57,11 @@ const Chart = () => {
       <LoadMoreComponent onLoadMore={loadMoreIdols} />
 
       {isVisible && (
-        <VoteModal items={fullIdols} onClose={closeModal} gender={gender} />
+        <VoteModal
+          items={fullIdols}
+          onClose={handleModalClose}
+          gender={gender}
+        />
       )}
     </div>
   );

@@ -10,11 +10,11 @@
   font-weight: 500;
   border: 1px solid variables.$white;
   background: variables.$gray;
-  @media (max-width: 768px) {
+  @media screen and (max-width: 1199px) {
     padding: 8px 27px;
     font-size: 14px;
   }
-  @media (max-width: 400px) {
+  @media screen and (max-width: 767px) {
     padding: 6px 25px;
   }
 }

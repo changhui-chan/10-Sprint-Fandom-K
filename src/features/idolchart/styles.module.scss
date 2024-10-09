@@ -26,11 +26,11 @@
   padding: 0 50px;
   z-index: 4;
 
-  @media (max-width: 768px) {
+  @media screen and (max-width: 1199px) {
     top: -30px;
   }
 
-  @media (max-width: 400px) {
+  @media screen and (max-width: 767px) {
     top: -20px;
   }
 }

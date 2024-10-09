@@ -21,12 +21,12 @@
   &:hover {
     background-color: variables.$dark-gray;
   }
-  @media (max-width: 768px) {
+  @media screen and (max-width: 1199px) {
     font-size: 15px;
     height: 40px;
   }
 
-  @media (max-width: 400px) {
+  @media screen and (max-width: 767px) {
     font-size: 13px;
     height: 38px;
   }
