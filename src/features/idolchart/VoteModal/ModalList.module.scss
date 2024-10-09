@@ -2,16 +2,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 15px;
-
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 8px;
+  margin-bottom: 8px;
   &:hover {
     background-color: variables.$dark-gray;
-  }
-  @media screen and (max-width: 1199px) {
-    padding: 8px 10px;
-  }
-  @media screen and (max-width: 767px) {
-    padding: 5px 8px;
   }
 }
 
