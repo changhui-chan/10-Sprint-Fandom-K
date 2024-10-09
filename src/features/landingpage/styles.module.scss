@@ -338,8 +338,10 @@
 .longLine {
   position: absolute;
   z-index: 1;
-  width: 120px;
-
+  width: 220px;
+  @media (max-width: 768px) {
+    width: 190px;
+  }
   @media (max-width: 400px) {
     width: 100px;
   }

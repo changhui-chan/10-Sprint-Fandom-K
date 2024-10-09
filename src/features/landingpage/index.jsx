@@ -6,6 +6,7 @@ import logo from '@/assets/images/logo.svg';
 import Line from '@/assets/images/img-line.svg';
 import NewJeans from '@/assets/images/img-newjeans.svg';
 import Illit from '@/assets/images/img-illit.svg';
+import Plave from '@/assets/images/img-plave.png';
 import TheBoyz from '@/assets/images/img-theboyz.svg';
 import topPhoto from '@/assets/images/img-landing.svg';
 import EnterButton from './enterbutton/EnterButton';
@@ -15,7 +16,7 @@ const Landing = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = async () => {
-    navigate('/chart');
+    navigate('/support');
   };
 
   return (
@@ -49,6 +50,19 @@ const Landing = () => {
         <div className={styles.behindContain}>
           <div className={styles.frontContain}>
             <div className={styles.titleContain2}>
+              <p className={styles.subTitle}>후원창 만들기</p>
+              <h3 className={styles.title}>내가 원하는 아티스트를 위한</h3>
+              <h3 className={styles.title}>후원창을 만들어보세요</h3>
+            </div>
+            <img src={Home2} alt="home2" className={styles.homeComponent} />
+          </div>
+          <div className={styles.photoContain}>
+            <img src={Plave} alt="plave" className={styles.backImg} />
+          </div>
+        </div>
+        <div className={styles.behindContain}>
+          <div className={styles.frontContain}>
+            <div className={styles.titleContain2}>
               <p className={styles.subTitle}>후원하기</p>
               <h3 className={styles.title}>좋아하는 아이돌에게</h3>
               <h3 className={styles.title}>쉽게 후원해보세요</h3>
@@ -64,8 +78,8 @@ const Landing = () => {
           <div className={styles.frontContain}>
             <div className={styles.titleContain2}>
               <p className={styles.subTitle}>이달의 아티스트</p>
-              <h1 className={styles.title}>내 아티스트에게</h1>
-              <h1 className={styles.title}>영예를 선물하세요</h1>
+              <h3 className={styles.title}>내 아티스트에게</h3>
+              <h3 className={styles.title}>영예를 선물하세요</h3>
             </div>
             <img src={Home2} alt="home2" className={styles.homeComponent} />
           </div>
