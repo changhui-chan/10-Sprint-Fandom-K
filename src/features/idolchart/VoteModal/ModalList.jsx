@@ -3,19 +3,9 @@ import IdolInfo from '@/features/idolchart/IdolProfile/IdolInfo';
 import True from '@/assets/images/radio-true.svg';
 import False from '@/assets/images/radio-false.svg';
 import styles from './ModalList.module.scss';
-import useSelectedIdolStore from './useSelectedIdolStore';
 
-const ModalListItem = ({ item }) => {
+const ModalListItem = ({ item, isSelected, onClick }) => {
   const { id: itemId, name, group, profilePicture, totalVotes } = item;
-
-  const selectedIdolId = useSelectedIdolStore((state) => state.selectedIdolId);
-  const setSelectedIdolId = useSelectedIdolStore(
-    (state) => state.setSelectedIdolId
-  );
-
-  const handleRadioChange = (id) => {
-    setSelectedIdolId(id);
-  };
 
   return (
     <div className={styles.idolListItem}>
@@ -35,15 +25,12 @@ const ModalListItem = ({ item }) => {
         <input
           type="radio"
           id={`idol-radio-${itemId}`}
-          checked={selectedIdolId === itemId}
-          onChange={() => handleRadioChange(itemId)}
+          checked={isSelected}
+          onChange={onClick}
           className={styles.radioInput}
         />
         <span className={styles.radioIcon}>
-          <img
-            src={selectedIdolId === itemId ? True : False}
-            alt="radio-icon"
-          />
+          <img src={isSelected ? True : False} alt="radio-icon" />
         </span>
       </label>
     </div>

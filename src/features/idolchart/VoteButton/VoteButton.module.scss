@@ -1,3 +1,12 @@
-Button {
+.voteButton {
   padding: 10px 30px;
+  font-size: 16px;
+  @media screen and (max-width: 1199px) {
+    padding: 9px 25px;
+    font-size: 14px;
+  }
+  @media screen and (max-width: 767px) {
+    padding: 8px 22px;
+    font-size: 13px;
+  }
 }

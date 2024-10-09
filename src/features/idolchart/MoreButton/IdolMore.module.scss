@@ -1,6 +1,20 @@
-.mButton {
+.buttonContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
+}
+.mButton {
+  padding: 10px 30px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid variables.$white;
+  background: variables.$gray;
+  @media screen and (max-width: 1199px) {
+    padding: 8px 27px;
+    font-size: 14px;
+  }
+  @media screen and (max-width: 767px) {
+    padding: 6px 25px;
+  }
 }
