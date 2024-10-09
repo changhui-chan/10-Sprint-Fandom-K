@@ -6,6 +6,7 @@ import styles from './CreateSupportForm.module.scss';
 import Question from './Question';
 import QuestionIdol from './QuestionIdol';
 import QuestionDate from './QuestionDate';
+import useFormStore from './useFormStore';
 
 const CreateSupportForm = () => {
   const [gender, setGender] = useState(`${IDOL_EX.GENDER}`);
@@ -24,9 +25,10 @@ const CreateSupportForm = () => {
     targetDonation: true,
   });
 
+  const { postSupport } = useFormStore();
+
   const handelIdolIdChange = () => {
-    // group이랑 member 값으로 api 요청, id 세팅하기
-    setIdolId(1111);
+    setIdolId(3731); // POST 테스트용: 장원영 id값
   };
 
   const handleGenderChange = (e) => {
@@ -129,22 +131,24 @@ const CreateSupportForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const formattedDeadline = dayjs(deadline).format();
+    const formattedDonation = targetDonation.replaceAll(',', '');
+
     const result = {
-      deadline: { deadline },
-      targetDonation: { targetDonation },
-      subtitle: { subtitle },
-      title: { title },
-      idolId: { idolId },
+      deadline: `${formattedDeadline}`,
+      targetDonation: Number(`${formattedDonation}`),
+      subtitle: `${subtitle}`,
+      title: `${title}`,
+      idolId: Number(`${idolId}`),
     };
-    // 변경 예정
-    // POST 보내기, 통합 fetch 이용
-    // console.log(result);
+
+    postSupport(result);
   };
 
   const handleCantSubmit = (e) => {
     e.preventDefault();
     // 제출 막았을때 동작 추가할건지
-    // console.log('message: Cant Submit (Invalid Input)');
+    console.log('message: Cant Submit (Invalid Input)');
   };
 
   const handleReset = () => {
@@ -178,11 +182,12 @@ const CreateSupportForm = () => {
         <QuestionIdol
           data="idol"
           isValid
-          value={{ gender, group, member }}
+          value={{ gender, group, member, idolId }}
           handleValueChange={{
             handleGenderChange,
             handleGroupChange,
             handleMemberChange,
+            handelIdolIdChange,
           }}
         />
         <Question
