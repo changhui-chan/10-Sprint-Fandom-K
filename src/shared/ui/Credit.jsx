@@ -72,7 +72,7 @@ const Credit = ({ customStyle }) => {
             alt="크레딧 아이콘"
             className={styles.creditIcon}
           />
-          <span className={styles.credit}>{credit}</span>
+          <span className={styles.credit}>{credit.toLocaleString()}</span>
         </button>
       </div>
       <Modal
@@ -85,6 +85,7 @@ const Credit = ({ customStyle }) => {
         <div className={styles.modal}>
           {[100, 500, 1000].map((value, index) => (
             <button
+              key={value}
               type="button"
               className={styles.radioButton}
               onClick={() => onRadioButtonClick(index)}

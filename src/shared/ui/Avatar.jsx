@@ -1,7 +1,8 @@
+import defaultImg from '@/assets/images/img-default-avatar.svg';
 import styles from './Avatar.module.scss';
 
 const Avatar = ({
-  src = './src/assets/images/img-default-avatar.svg',
+  src = defaultImg,
   alt = '아바타 이미지',
   customImageStyle,
 }) => {
