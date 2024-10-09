@@ -11,8 +11,10 @@ const LoadMoreComponent = ({ onLoadMore }) => {
   };
 
   return (
-    <div className={style.mButton}>
-      <Button onClick={handleLoadMore}>더보기</Button>
+    <div className={style.buttonContainer}>
+      <Button onClick={handleLoadMore} className={style.mButton}>
+        더보기
+      </Button>
     </div>
   );
 };

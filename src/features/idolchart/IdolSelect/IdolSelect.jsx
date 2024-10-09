@@ -13,14 +13,14 @@ const IdolSelect = ({ onGenderChange }) => {
     <div className={styles.chartButton}>
       <button
         type="button"
-        className={`${styles.chartButton} ${gender === 'female' ? styles.current : 'FEMALE'}`}
+        className={`${styles.chartButton} ${gender === 'female' ? styles.current : ''}`}
         onClick={() => handleGenderChange('female')}
       >
         이달의 여자 아이돌
       </button>
       <button
         type="button"
-        className={`${styles.chartButton} ${gender === 'male' ? styles.current : 'MALE'}`}
+        className={`${styles.chartButton} ${gender === 'male' ? styles.current : ''}`}
         onClick={() => handleGenderChange('male')}
       >
         이달의 남자 아이돌

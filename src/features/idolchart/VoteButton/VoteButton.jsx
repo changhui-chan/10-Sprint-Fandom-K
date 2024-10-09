@@ -3,9 +3,9 @@ import styles from './VoteButton.module.scss';
 
 const VoteButton = ({ onClick }) => {
   return (
-    <div className={styles.voteButton}>
-      <Button onClick={onClick}>투표하기</Button>
-    </div>
+    <Button onClick={onClick} className={styles.voteButton}>
+      투표하기
+    </Button>
   );
 };
 

@@ -1,8 +1,39 @@
-.modal {
-  max-height: 800px;
-  width: 400px;
-  overflow-y: auto;
+.voteModal {
+  width: 500px;
+  max-height: 750px;
   padding: 15px 20px;
+
+  @media (max-width: 1199px) {
+    width: 399px;
+  }
+  @media (max-width: 767px) {
+    width: 100%;
+    border-radius: 0;
+    height: 100%;
+  }
+}
+
+.headerText {
+  font-size: 20px;
+  @media (max-width: 1199px) {
+    font-size: 17px;
+  }
+  @media (max-width: 767px) {
+    font-size: 25px;
+  }
+}
+
+.voteButton {
+  padding: 10px 30px;
+  font-size: 16px;
+  @media screen and (max-width: 1199px) {
+    padding: 9px 25px;
+    font-size: 14px;
+  }
+  @media screen and (max-width: 767px) {
+    padding: 8px 22px;
+    font-size: 13px;
+  }
 }
 
 .modalList {
@@ -11,39 +42,15 @@
   overflow-y: auto;
   margin-bottom: 20px;
   padding: 0;
+  margin-top: 20px;
 }
 
-.modalListItem {
+.footerText {
+  margin-top: 10px;
+  color: variables.$white;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px 10px;
-
-  &:hover {
-    background-color: variables.$dark-gray;
-  }
 }
 
-.radioLabel {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.radioInput {
-  display: none;
-}
-
-.radioIcon {
-  width: 24px;
-  height: 24px;
-  margin-left: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.radioIcon img {
-  width: 100%;
-  height: auto;
+.alertText {
+  color: variables.$pink;
 }
