@@ -14,7 +14,7 @@ const VoteModal = ({ items = [], onClose, gender }) => {
   const [showAlert, setShowAlert] = useState(false);
   const [selectedIdolId, setSelectedIdolId] = useState(null);
   const handleClick = async () => {
-    const voteCost = 0;
+    const voteCost = 1000;
 
     if (selectedIdolId) {
       if (credit < voteCost) {
