@@ -2,12 +2,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1200px;
+  max-width: 1200px;
   margin: 0 auto;
+
+  position: fixed;
+  z-index: 100;
+  inset: 0 0 auto 0;
+  height: 80px;
+  background: linear-gradient(
+    to bottom,
+    variables.$black 90%,
+    rgba(2, 0, 14, 0.7) 95%,
+    rgba(2, 0, 14, 0) 100%
+  );
 }
 
 .user {
   display: flex;
+  align-items: center;
   gap: 6px;
 }
 
@@ -20,6 +32,7 @@
 
 @media screen and (max-width: 767px) {
   .container {
-    max-width: 400px;
+    min-width: 400px;
+    height: 44px;
   }
 }

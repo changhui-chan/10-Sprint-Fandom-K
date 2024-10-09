@@ -1,18 +1,13 @@
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-
   button {
     display: flex;
     align-items: center;
-    justify-content: center;
   }
 
   span {
     color: variables.$white;
     font-size: 24px;
+    line-height: 0;
   }
 }
 
@@ -27,7 +22,7 @@
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
-    line-height: 26px; 
+    line-height: 26px;
   }
 }
 
@@ -77,4 +72,12 @@
 
 .customModalContainerStyle {
   padding: 24px 16px 32px !important;
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    span {
+      font-size: 20px;
+    }
+  }
 }
