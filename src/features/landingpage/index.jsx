@@ -23,11 +23,11 @@ const Landing = () => {
     <div className={styles.allContain}>
       <div className={styles.topContain}>
         <div className={styles.titleContain1}>
-          <h3 className={styles.title}>내가 좋아하는 아이돌을</h3>
+          <h3 className={styles.title1}>내가 좋아하는 아이돌을</h3>
           <div className={styles.smtitleContain}>
-            <h3 className={styles.title}>가장&nbsp;</h3>
+            <h3 className={styles.title1}>가장&nbsp;</h3>
             <h3 className={styles.title2}>쉽게 덕질</h3>
-            <h3 className={styles.title}>&nbsp;하는 방법</h3>
+            <h3 className={styles.title1}>&nbsp;하는 방법</h3>
           </div>
           <button
             onClick={handleButtonClick}
