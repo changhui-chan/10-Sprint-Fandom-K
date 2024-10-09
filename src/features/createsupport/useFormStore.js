@@ -40,6 +40,26 @@ const useFormStore = create((set) => ({
       set({ isPosting: false });
     }
   },
+
+  getIdolId: async (group, member) => {
+    set({ isLoading: true, error: null });
+
+    const name = member;
+    const url = URL_IDOLS;
+    const query = {
+      keyword: `${name}`,
+    };
+
+    try {
+      const { data: selectedIdol } = await fetchData(url, query);
+      // console.log('selected data: ', selectedIdol);
+      set({ newId: selectedIdol?.list[0].id || 0 });
+    } catch (error) {
+      set({ error: error.message });
+    } finally {
+      set({ isLoading: false });
+    }
+  },
 }));
 
 export default useFormStore;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import Button from '@/shared/ui/Button';
 import { IDOL_EX } from '@/shared/constant/QUESTIONS';
@@ -25,11 +25,7 @@ const CreateSupportForm = () => {
     targetDonation: true,
   });
 
-  const { postSupport } = useFormStore();
-
-  const handelIdolIdChange = () => {
-    setIdolId(3731); // POST 테스트용: 장원영 id값
-  };
+  const { newId, getIdolId, postSupport } = useFormStore();
 
   const handleGenderChange = (e) => {
     setGender(e.target.value);
@@ -51,12 +47,26 @@ const CreateSupportForm = () => {
 
   const handleMemberChange = (e) => {
     setMember(e.target.value);
-    handelIdolIdChange();
+
     setIsValid((prevValues) => ({
       ...prevValues,
       idolId: true,
     }));
   };
+
+  useEffect(() => {
+    console.log('useEffect 동작: ', gender, group, member);
+    if (
+      gender !== IDOL_EX.GENDER &&
+      group !== IDOL_EX.GROUP &&
+      member !== IDOL_EX.MEMBER
+    ) {
+      console.log('status 조건만족: ', gender, group, member);
+      getIdolId(group, member);
+      console.log('newID값: ', newId);
+      setIdolId(newId);
+    }
+  }, [gender, group, member, getIdolId, newId]);
 
   const handleTitleChange = (e) => {
     if (e.target.value === '') {
@@ -141,14 +151,13 @@ const CreateSupportForm = () => {
       title: `${title}`,
       idolId: Number(`${idolId}`),
     };
-
+    // console.log('post: ', result);
     postSupport(result);
   };
 
   const handleCantSubmit = (e) => {
     e.preventDefault();
-    // 제출 막았을때 동작 추가할건지
-    console.log('message: Cant Submit (Invalid Input)');
+    // console.log('message: Cant Submit (Invalid Input)');
   };
 
   const handleReset = () => {
@@ -182,12 +191,11 @@ const CreateSupportForm = () => {
         <QuestionIdol
           data="idol"
           isValid
-          value={{ gender, group, member, idolId }}
+          value={{ gender, group, member }}
           handleValueChange={{
             handleGenderChange,
             handleGroupChange,
             handleMemberChange,
-            handelIdolIdChange,
           }}
         />
         <Question
