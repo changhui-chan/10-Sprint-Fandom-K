@@ -1,12 +1,11 @@
 import Account from '../../features/mypage/Account';
-import Header from '../../shared/layout/Header';
+import styles from './index.module.scss';
 
 const Mypage = () => {
   return (
-    <>
-      <Header />
+    <div className={styles.container}>
       <Account />
-    </>
+    </div>
   );
 };
 

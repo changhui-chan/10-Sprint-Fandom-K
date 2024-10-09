@@ -1,12 +1,11 @@
 import Chart from '../../features/idolchart';
-import Header from '../../shared/layout/Header';
+import styles from './index.module.scss';
 
 const ChartPage = () => {
   return (
-    <>
-      <Header />
+    <div className={styles.container}>
       <Chart />
-    </>
+    </div>
   );
 };
 
