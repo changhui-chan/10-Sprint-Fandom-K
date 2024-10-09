@@ -21,7 +21,7 @@ const Header = () => {
           <img src={Menu} alt="메뉴" className={styles.menu} />
         </button>
         <Link to="/support">
-          <Logo />
+          <Logo customLogoStyle={styles.logo} />
         </Link>
         <div className={styles.user}>
           <Credit />
