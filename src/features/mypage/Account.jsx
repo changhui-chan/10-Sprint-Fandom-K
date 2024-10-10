@@ -13,7 +13,7 @@ import {
 import useCarousel from '../../shared/hooks/useCarousel';
 
 const Account = () => {
-  const { isLoding, error, idolData, fetchAccount } = useAccountStore();
+  const { isLoading, error, idolData, fetchAccount } = useAccountStore();
   const { addIdolState, resetIdolState } = useIdolStateStore();
   const {
     selectedIdolList,
@@ -24,11 +24,11 @@ const Account = () => {
     removeTempIdol,
   } = useSelectedIdolListStore();
   const [idolToShow, setIdolToShow] = useState(16);
-  const allCarousel = useCarousel(idolData.length, idolToShow, 115);
+  const allCarousel = useCarousel(idolData.length / 2, idolToShow, 155);
   const selectedCarousel = useCarousel(
     selectedIdolList.length,
     idolToShow,
-    115
+    155
   );
 
   useEffect(() => {
@@ -64,7 +64,12 @@ const Account = () => {
   };
 
   const handleAddIdol = () => {
-    addIdol(tempIdolList);
+    if (tempIdolList.length <= 0) return;
+    const selectedIdolIds = selectedIdolList.map((idol) => idol.id);
+    const filteredTempIdolList = tempIdolList.filter(
+      (idol) => !selectedIdolIds.includes(idol.id)
+    );
+    addIdol(filteredTempIdolList);
     resetIdolState(idolData);
     removeTempIdol(tempIdolList);
   };
@@ -75,7 +80,7 @@ const Account = () => {
 
   return (
     <div className={styles.fragment}>
-      {isLoding && <p className={styles.loading}>Loading...</p>}
+      {isLoading && <p className={styles.loading}>Loading...</p>}
       {error && <p>Error: {error}</p>}
       <p className={styles.selectedTitle}>내가 관심있는 아이돌</p>
       <div className={styles.wrapper}>
@@ -137,9 +142,7 @@ const Account = () => {
       <div className={styles.wrapper}>
         <button
           className={`${styles.button} ${styles.left}`}
-          onClick={() =>
-            selectedCarousel.handleButton(allCarousel.currentIndex - 1)
-          }
+          onClick={() => allCarousel.handleButton(allCarousel.currentIndex - 1)}
           disabled={allCarousel.currentIndex === 0}
         >
           <img src={leftIcon} alt="이전 슬라이드" />
