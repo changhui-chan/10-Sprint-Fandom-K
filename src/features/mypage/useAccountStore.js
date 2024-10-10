@@ -4,7 +4,7 @@ import { URL_IDOLS } from '../../shared/constant/url';
 
 export const useAccountStore = create((set) => ({
   idolData: [],
-  isLoding: false,
+  isLoading: false,
   error: null,
   fetchAccount: async () => {
     set({ isLoading: true, error: null });

@@ -13,7 +13,7 @@ import {
 import useCarousel from '../../shared/hooks/useCarousel';
 
 const Account = () => {
-  const { isLoding, error, idolData, fetchAccount } = useAccountStore();
+  const { isLoading, error, idolData, fetchAccount } = useAccountStore();
   const { addIdolState, resetIdolState } = useIdolStateStore();
   const {
     selectedIdolList,
@@ -80,7 +80,7 @@ const Account = () => {
 
   return (
     <div className={styles.fragment}>
-      {isLoding && <p className={styles.loading}>Loading...</p>}
+      {isLoading && <p className={styles.loading}>Loading...</p>}
       {error && <p>Error: {error}</p>}
       <p className={styles.selectedTitle}>내가 관심있는 아이돌</p>
       <div className={styles.wrapper}>
