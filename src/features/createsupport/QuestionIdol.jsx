@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { QUESTIONS, IDOL_EX } from '@/shared/constant/QUESTIONS';
+import { QUESTIONS, IDOLID_EX } from '@/shared/constant/QUESTIONS';
 import styles from './Question.module.scss';
 import Dropdown from './Dropdown';
 import useFormStore from './useFormStore';
@@ -39,21 +39,21 @@ const QuestionIdol = ({ data, value, handleValueChange }) => {
           list={genderList}
           selected={gender}
           handleSelect={handleGenderChange}
-          initial={IDOL_EX.GENDER}
+          initial={IDOLID_EX.GENDER}
         />
         <Dropdown
           className={styles.dropdown}
           list={groupList[gender]}
           selected={group}
           handleSelect={handleGroupChange}
-          initial={IDOL_EX.GROUP}
+          initial={IDOLID_EX.GROUP}
         />
         <Dropdown
           className={styles.dropdown}
           list={memberList[group]}
           selected={member}
           handleSelect={handleMemberChange}
-          initial={IDOL_EX.MEMBER}
+          initial={IDOLID_EX.MEMBER}
         />
       </div>
     </div>

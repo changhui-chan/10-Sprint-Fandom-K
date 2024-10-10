@@ -62,3 +62,33 @@
   flex-direction: row;
   gap: 10px;
 }
+
+@media screen and (max-width: 767px) {
+  .questionText {
+    font-size: 16px;
+    line-height: 16px;
+    margin-bottom: 8px;
+  }
+
+  .questionEx {
+    line-height: 16px;
+    padding: 0 0 0 8px;
+    margin-top: 6px;
+  }
+
+  .field {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .errmsgNotvalid {
+    line-height: 16px;
+    padding: 0 0 0 8px;
+    margin-top: 4px;
+    margin-bottom: -4px;
+  }
+
+  .idolquestion {
+    gap: 6px;
+  }
+}

@@ -50,3 +50,21 @@
 .field svg {
   fill: variables.$white;
 }
+
+@media screen and (max-width: 767px) {
+  .question {
+    font-size: 16px;
+    line-height: 16px;
+    margin-bottom: 8px;
+  }
+
+  .questionEx {
+    line-height: 16px;
+    padding: 0 0 0 8px;
+    margin-top: 6px;
+  }
+
+  .field input {
+    font-size: 14px !important;
+  }
+}
