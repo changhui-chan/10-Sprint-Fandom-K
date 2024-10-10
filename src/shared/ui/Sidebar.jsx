@@ -6,14 +6,16 @@ import rankIcon from '@/assets/images/ic-rank.svg';
 import forwardIcon from '@/assets/images/ic-forward.svg';
 import createSupportIcon from '@/assets/images/ic-create-support.svg';
 import accountIcon from '@/assets/images/ic-account.svg';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Avatar from './Avatar';
 import Logo from './Logo';
 import styles from './Sidebar.module.scss';
 import { useSidebarStore } from './useSidebar';
 
-const Sidebar = () => {
+const Sidebar = (buttonClick = () => {}) => {
   const { isOpen, closeSidebar } = useSidebarStore();
+  const [visible, setVisible] = useState(false);
+  const sidebarRef = useRef(null);
 
   useEffect(() => {
     const handleEscape = (event) => {
@@ -29,11 +31,44 @@ const Sidebar = () => {
     };
   }, [closeSidebar]);
 
+  useEffect(() => {
+    if (isOpen) {
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+  }, [isOpen]);
+
+  const handleOutsideClick = (e) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(e.target)) {
+      closeSidebar();
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      buttonClick();
+    }
+  };
+
   return (
     <div>
       {isOpen && (
-        <div className={styles.overlay}>
-          <div className={styles.container}>
+        <div
+          className={styles.overlay}
+          onClick={(e) => handleOutsideClick(e)}
+          onKeyUp={handleKeyPress}
+          role="button"
+          tabIndex={0}
+        >
+          <div
+            className={
+              visible
+                ? `${styles.container} ${styles.visible}`
+                : styles.container
+            }
+            ref={sidebarRef}
+          >
             <div className={styles.header}>
               <Logo customLogoStyle={styles.logo} />
               <button onClick={closeSidebar}>

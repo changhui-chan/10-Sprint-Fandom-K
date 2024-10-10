@@ -85,6 +85,21 @@
   height: 18px;
 }
 
+.visible {
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateX(-40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 @media screen and (max-width: 1199px) {
   .container {
     width: 40%;
