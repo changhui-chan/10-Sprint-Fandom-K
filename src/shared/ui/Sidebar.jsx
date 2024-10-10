@@ -4,6 +4,8 @@ import homeIcon from '@/assets/images/ic-home.svg';
 import starIcon from '@/assets/images/ic-star.svg';
 import rankIcon from '@/assets/images/ic-rank.svg';
 import forwardIcon from '@/assets/images/ic-forward.svg';
+import createSupportIcon from '@/assets/images/ic-create-support.svg';
+import accountIcon from '@/assets/images/ic-account.svg';
 import { useEffect } from 'react';
 import Avatar from './Avatar';
 import Logo from './Logo';
@@ -39,8 +41,10 @@ const Sidebar = () => {
               </button>
             </div>
             <div className={styles.user}>
-              <Avatar />
-              <p>User</p>
+              <Link to="/mypage" onClick={closeSidebar}>
+                <Avatar />
+                <p>User</p>
+              </Link>
             </div>
             <div className={styles.menu}>
               <section className={styles.general}>
@@ -65,7 +69,7 @@ const Sidebar = () => {
                         className={styles.link}
                         onClick={closeSidebar}
                       >
-                        <p>후원하기</p>
+                        <p>후원 페이지</p>
                         <img src={forwardIcon} alt="화살표 아이콘" />
                       </Link>
                     </li>
@@ -76,7 +80,36 @@ const Sidebar = () => {
                         className={styles.link}
                         onClick={closeSidebar}
                       >
-                        <p>차트</p>
+                        <p>차트 페이지</p>
+                        <img src={forwardIcon} alt="화살표 아이콘" />
+                      </Link>
+                    </li>
+                  </ul>
+                </nav>
+              </section>
+              <section className={styles.account}>
+                <span className={styles.label}>USER</span>
+                <nav className={styles.nav}>
+                  <ul>
+                    <li>
+                      <img src={accountIcon} alt="어카운트 아이콘" />
+                      <Link
+                        to="/mypage"
+                        className={styles.link}
+                        onClick={closeSidebar}
+                      >
+                        <p>마이 페이지</p>
+                        <img src={forwardIcon} alt="화살표 아이콘" />
+                      </Link>
+                    </li>
+                    <li>
+                      <img src={createSupportIcon} alt="후원 아이콘" />
+                      <Link
+                        to="/mypage/create-support"
+                        className={styles.link}
+                        onClick={closeSidebar}
+                      >
+                        <p>후원 등록하기</p>
                         <img src={forwardIcon} alt="화살표 아이콘" />
                       </Link>
                     </li>
