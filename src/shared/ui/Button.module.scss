@@ -1,13 +1,25 @@
 .button {
-  background: linear-gradient(45deg, variables.$orange, variables.$pink);
+  background: linear-gradient(90deg, variables.$orange, variables.$pink);
   border-radius: 3px;
   font-size: 14px;
   font-weight: 700;
   line-height: 26px;
   color: #ffffff;
   text-wrap: nowrap;
-}
 
-.button:disabled {
-  background: variables.$gray;
+  border: none;
+  transition: border 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(270deg, variables.$orange, variables.$pink);
+  }
+
+  &:disabled {
+    background: variables.$gray;
+    cursor: auto;
+  }
+
+  &:disabled:hover {
+    background: variables.$gray;
+  }
 }

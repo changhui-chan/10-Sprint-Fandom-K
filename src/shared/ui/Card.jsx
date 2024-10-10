@@ -9,6 +9,7 @@ const Card = ({
   target,
   deadline,
   progress = 0,
+  status,
   children,
   onButtonClick = () => {},
 }) => {
@@ -16,8 +17,12 @@ const Card = ({
     <div className={styles.container}>
       <div className={styles.header}>
         <img src={idolImg} alt="아이돌 이미지" className={styles.image} />
-        <Button className={styles.button} onClick={onButtonClick}>
-          후원하기
+        <Button
+          className={styles.button}
+          onClick={onButtonClick}
+          disabled={!status}
+        >
+          {status ? '후원하기' : '후원완료'}
         </Button>
       </div>
       <div className={styles.content}>
