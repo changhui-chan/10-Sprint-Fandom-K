@@ -1,5 +1,5 @@
 import CreditIcon from '@/assets/images/credit.svg';
-import { useEffect, useState } from 'react';
+import { useState, useRef } from 'react';
 import styles from './Credit.module.scss';
 import {
   useChargeModalVisibilityStore,
@@ -11,12 +11,13 @@ import useModalStore from './modal/useModalStore';
 const Credit = ({ customStyle }) => {
   const { credit, addCredit } = useCreditStore();
   const { setChargeModalVisibility } = useChargeModalVisibilityStore();
-  const { openModal, removeElement } = useModalStore();
+  const { modals, openModal, closeModal } = useModalStore();
   const [selected, setSelected] = useState(null);
+  const modalId = useRef('credit');
 
   const onClick = () => {
     setChargeModalVisibility(true);
-    openModal();
+    openModal(modalId.current);
   };
 
   const onRadioButtonClick = (index) => {
@@ -38,30 +39,14 @@ const Credit = ({ customStyle }) => {
 
     setChargeModalVisibility(false);
     setSelected(null);
-    removeElement();
+    closeModal(modalId.current);
   };
 
   const onClose = () => {
     setChargeModalVisibility(false);
     setSelected(null);
-    removeElement();
+    closeModal(modalId.current);
   };
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        setChargeModalVisibility(false);
-        setSelected(null);
-        removeElement();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [setChargeModalVisibility, removeElement]);
 
   return (
     <>
@@ -75,36 +60,45 @@ const Credit = ({ customStyle }) => {
           <span className={styles.credit}>{credit.toLocaleString()}</span>
         </button>
       </div>
-      <Modal
-        headerText="크레딧 충전"
-        onClose={onClose}
-        buttonText="충전하기"
-        customModalContainerStyle={styles.customModalContainerStyle}
-        buttonClick={buttonClick}
-      >
-        <div className={styles.modal}>
-          {[100, 500, 1000].map((value, index) => (
-            <button
-              key={value}
-              type="button"
-              className={styles.radioButton}
-              onClick={() => onRadioButtonClick(index)}
-            >
-              <img
-                src={CreditIcon}
-                alt="크레딧 아이콘"
-                className={styles.creditIcon}
-              />
-              <p>{value}</p>
-              <div
-                className={`
+      {modals[modalId.current]?.isVisible && (
+        <Modal
+          headerText="크레딧 충전"
+          onClose={onClose}
+          buttonText={
+            <div className={styles.buttonContainer}>
+              <img src={CreditIcon} alt="크레딧아이콘" />
+              충전하기
+            </div>
+          }
+          customModalContainerStyle={styles.customModalContainerStyle}
+          customModalButtonStyle={styles.customModalButtonStyle}
+          buttonClick={buttonClick}
+          isVisible={modals[modalId.current]?.isVisible}
+        >
+          <div className={styles.modal}>
+            {[100, 500, 1000].map((value, index) => (
+              <button
+                key={value}
+                type="button"
+                className={styles.radioButton}
+                onClick={() => onRadioButtonClick(index)}
+              >
+                <img
+                  src={CreditIcon}
+                  alt="크레딧 아이콘"
+                  className={styles.creditIcon}
+                />
+                <p>{value}</p>
+                <div
+                  className={`
                 ${styles.radio} 
                 ${selected === index ? styles.selected : ''}`}
-              />
-            </button>
-          ))}
-        </div>
-      </Modal>
+                />
+              </button>
+            ))}
+          </div>
+        </Modal>
+      )}
     </>
   );
 };

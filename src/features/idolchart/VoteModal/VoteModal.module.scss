@@ -1,11 +1,6 @@
 .voteModal {
-  width: 500px;
-  max-height: 750px;
   padding: 15px 20px;
 
-  @media (max-width: 1199px) {
-    width: 399px;
-  }
   @media (max-width: 767px) {
     width: 100%;
     border-radius: 0;
@@ -24,25 +19,33 @@
 }
 
 .voteButton {
-  padding: 10px 30px;
-  font-size: 16px;
-  @media screen and (max-width: 1199px) {
-    padding: 9px 25px;
-    font-size: 14px;
-  }
+  padding: 8px 214px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 26px;
+
   @media screen and (max-width: 767px) {
-    padding: 8px 22px;
-    font-size: 13px;
+    width: 100%;
+    padding: 8px;
   }
 }
 
 .modalList {
-  max-height: 500px;
+  max-height: 514px;
   width: 100%;
   overflow-y: auto;
+  scrollbar-width: none;
   margin-bottom: 20px;
   padding: 0;
   margin-top: 20px;
+
+  @media screen and (max-width: 767px) {
+    max-height: none;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .footerText {
@@ -53,4 +56,10 @@
 
 .alertText {
   color: variables.$pink;
+}
+
+.customModalContentStyle {
+  @media (max-width: 767px) {
+    height: calc(100vh - 20vh);
+  }
 }

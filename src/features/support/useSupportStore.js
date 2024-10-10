@@ -35,6 +35,12 @@ const useSupportStore = create((set) => ({
       set({ error: error.message });
     }
   },
+  setSupports: (data) =>
+    set((state) => ({
+      supports: state.supports.map((support) =>
+        support.id === data.id ? { ...support, ...data } : support
+      ),
+    })),
 }));
 
 export default useSupportStore;

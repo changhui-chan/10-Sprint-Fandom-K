@@ -3,6 +3,7 @@ import caculateProgress from '@/shared/utils/caculateProgress';
 import useSupportStore from './useSupportStore';
 import CardList from './CardList';
 import SupportModal from './SupportModal';
+import AlertModal from '../credit/AlertModal';
 import styles from './index.module.scss';
 
 const Support = () => {
@@ -51,6 +52,7 @@ const Support = () => {
         <CardList supports={supports} />
       </div>
       <SupportModal />
+      <AlertModal />
     </section>
   );
 };

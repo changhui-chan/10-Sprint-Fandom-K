@@ -1,10 +1,15 @@
 import { create } from 'zustand';
 
 const useModalStore = create((set) => ({
-  isVisible: false,
-  modalContent: null,
-  openModal: (content) => set({ isVisible: true, modalContent: content }),
-  removeElement: () => set({ isVisible: false, modalContent: null }),
+  modals: {},
+  openModal: (id, content) =>
+    set((state) => ({
+      modals: { ...state.modals, [id]: { isVisible: true, content } },
+    })),
+  closeModal: (id) =>
+    set((state) => ({
+      modals: { ...state.modals, [id]: { isVisible: false, content: null } },
+    })),
 }));
 
 export default useModalStore;

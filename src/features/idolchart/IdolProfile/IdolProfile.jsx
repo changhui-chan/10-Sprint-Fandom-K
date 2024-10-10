@@ -1,6 +1,6 @@
 import styles from './IdolProfile.module.scss';
 
-const IdolProfile = ({ profilePicture, name, isSelected, size = '60px' }) => {
+const IdolProfile = ({ profilePicture, name, isSelected, size = '70px' }) => {
   return (
     <div
       className={`${styles.idolProfileWrapper} ${isSelected ? styles.selected : ''}`}

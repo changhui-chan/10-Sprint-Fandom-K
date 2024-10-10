@@ -5,7 +5,9 @@ import leftIcon from '@/assets/images/btn-pagination-left.svg';
 import rightIcon from '@/assets/images/btn-pagination-right.svg';
 import caculateProgress from '@/shared/utils/caculateProgress';
 import { formatDate, getRamainingDays } from '@/shared/utils/formatDate';
+import { useRef } from 'react';
 import styles from './CardList.module.scss';
+import { useCreditStore } from '../../entities/store/store';
 
 const CardList = ({ supports, type = '' }) => {
   const {
@@ -19,10 +21,17 @@ const CardList = ({ supports, type = '' }) => {
     handleButton,
   } = useCarousel(supports.length);
 
+  const { credit } = useCreditStore();
   const { openModal } = useModalStore();
+  const modalId = useRef('support');
+  const alertId = useRef('alert');
 
   const handleButtonClick = (id, image, title, subtitle) => {
-    openModal({ id, image, title, subtitle });
+    if (credit === 0) {
+      openModal(alertId.current);
+      return;
+    }
+    openModal(modalId.current, { id, image, title, subtitle });
   };
 
   return supports.length ? (

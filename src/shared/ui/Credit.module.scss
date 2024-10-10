@@ -70,8 +70,23 @@
   border: 1px solid variables.$orange;
 }
 
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  img {
+    width: 13px;
+    height: 13px;
+  }
+}
+
 .customModalContainerStyle {
   padding: 24px 16px 32px !important;
+}
+
+.customModalButtonStyle {
+  padding: 8px 114px;
 }
 
 @media screen and (max-width: 767px) {
