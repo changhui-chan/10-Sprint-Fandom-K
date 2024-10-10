@@ -1,7 +1,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 40px;
   width: 600px;
   margin: 100px auto;
 }
@@ -23,8 +23,68 @@
   padding: 8px 20px;
 }
 
-.submit {
+.submit,
+.back {
   padding: 8px 20px;
+}
+
+.submitContainer {
+  display: flex;
+  gap: 12px;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #bbbbbb;
+  padding: 8px 20px;
+  width: 120px;
+  height: 40px;
+}
+
+.confirmButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  width: 120px;
+  height: 40px;
+}
+
+.backButtonModal {
+  margin: 12px auto;
+}
+
+.modalButtonContainer {
+  display: flex;
+  gap: 40px;
+}
+
+.defaultButton {
+  display: none;
+}
+
+.modalContainer {
+  display: flex;
+  max-width: 295px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    margin: 6px auto 40px auto;
+    font-size: 20px;
+    font-weight: 700;
+    color: variables.$white;
+    text-align: center;
+    overflow: wrap;
+  }
+
+  img {
+    width: 160px;
+    height: 160px;
+  }
 }
 
 // tablet

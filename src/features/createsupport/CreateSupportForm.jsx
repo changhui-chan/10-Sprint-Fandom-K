@@ -1,13 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import Button from '@/shared/ui/Button';
+import exclamationImage from '@/assets/images/ic-exclamation.svg';
 import { IDOLID_EX } from '@/shared/constant/QUESTIONS';
 import styles from './CreateSupportForm.module.scss';
 import Question from './Question';
 import QuestionIdol from './QuestionIdol';
 import QuestionDate from './QuestionDate';
 import useFormStore from './useFormStore';
+import Modal from '../../shared/ui/modal';
+import useModalStore from '../../shared/ui/modal/useModalStore';
 
 const CreateSupportForm = () => {
   const [gender, setGender] = useState(`${IDOLID_EX.GENDER}`);
@@ -25,10 +28,12 @@ const CreateSupportForm = () => {
     deadline: true,
     targetDonation: true,
   });
+  const modalId = useRef('confirm');
 
   const navigate = useNavigate();
 
   const { newId, getIdolId, postSupport } = useFormStore();
+  const { modals, openModal, closeModal } = useModalStore();
 
   const handleGenderChange = (e) => {
     setGender(e.target.value);
@@ -208,52 +213,100 @@ const CreateSupportForm = () => {
     });
   };
 
+  const handleOpenBackModal = () => {
+    openModal(modalId.current);
+  };
+
+  const handleCloseModal = () => {
+    closeModal(modalId.current);
+  };
+
+  const handleGoBack = () => {
+    handleReset();
+    closeModal(modalId.current);
+    navigate(-1);
+  };
+
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <div className={styles.questions}>
-        <QuestionIdol
-          data="idolId"
-          value={{ gender, group, member }}
-          handleValueChange={{
-            handleGenderChange,
-            handleGroupChange,
-            handleMemberChange,
-          }}
-        />
-        <Question
-          data="title"
-          isValid={isValid}
-          value={title}
-          handleValueChange={handleTitleChange}
-        />
-        <Question
-          data="subtitle"
-          isValid={isValid}
-          value={subtitle}
-          handleValueChange={handleSubtitleChange}
-        />
-        <QuestionDate
-          data="deadline"
-          isValid={isValid}
-          value={deadline}
-          handleValueChange={handleDeadlineChange}
-        />
-        <Question
-          data="targetDonation"
-          isValid={isValid}
-          value={targetDonation}
-          handleValueChange={handleTargetDonationChange}
-        />
-      </div>
-      <div className={styles.footer}>
-        <Button className={styles.reset} onClick={handleReset}>
-          폼 지우기
-        </Button>
-        <Button className={styles.submit} type="submit">
-          제출하기
-        </Button>
-      </div>
-    </form>
+    <>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.questions}>
+          <QuestionIdol
+            data="idolId"
+            value={{ gender, group, member }}
+            handleValueChange={{
+              handleGenderChange,
+              handleGroupChange,
+              handleMemberChange,
+            }}
+          />
+          <Question
+            data="title"
+            isValid={isValid}
+            value={title}
+            handleValueChange={handleTitleChange}
+          />
+          <Question
+            data="subtitle"
+            isValid={isValid}
+            value={subtitle}
+            handleValueChange={handleSubtitleChange}
+          />
+          <QuestionDate
+            data="deadline"
+            isValid={isValid}
+            value={deadline}
+            handleValueChange={handleDeadlineChange}
+          />
+          <Question
+            data="targetDonation"
+            isValid={isValid}
+            value={targetDonation}
+            handleValueChange={handleTargetDonationChange}
+          />
+        </div>
+        <div className={styles.footer}>
+          <Button className={styles.back} onClick={handleOpenBackModal}>
+            나가기
+          </Button>
+          <div className={styles.submitContainer}>
+            <Button className={styles.reset} onClick={handleReset}>
+              폼 지우기
+            </Button>
+            <Button className={styles.submit} type="submit">
+              제출하기
+            </Button>
+          </div>
+        </div>
+      </form>
+      {modals[modalId.current]?.isVisible && (
+        <Modal
+          customModalContentStyle={styles.backButtonModal}
+          onClose={handleCloseModal}
+          customModalButtonStyle={styles.defaultButton}
+          isVisible={modals[modalId.current]?.isVisible}
+        >
+          <div className={styles.modalContainer}>
+            <img
+              src={exclamationImage}
+              className={styles.exclamationImage}
+              alt="느낌표 이미지"
+            />
+            <p>
+              페이지를 떠나시면 작성 중인 내용을 잃게 됩니다. 떠나시겠습니까?
+            </p>
+            <div className={styles.modalButtonContainer}>
+              <Button className={styles.backButton} onClick={handleCloseModal}>
+                취소
+              </Button>
+              <Button className={styles.confirmButton} onClick={handleGoBack}>
+                확인
+              </Button>
+            </div>
+          </div>
+        </Modal>
+      )}
+    </>
   );
 };
 
