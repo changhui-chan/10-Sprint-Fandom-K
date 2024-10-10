@@ -16,6 +16,7 @@ const Modal = ({
   onClose = () => {},
   buttonClick = () => {},
   isVisible = false,
+  customHeader = null,
 }) => {
   const modalRef = useRef(null);
 
@@ -64,7 +65,10 @@ const Modal = ({
         ref={modalRef}
         className={`${styles.container} ${isVisible ? styles.visible : styles.hidden} ${customModalContainerStyle}`}
       >
-        <ModalHeader headerText={headerText} onClose={onClose} />
+        {customHeader ||
+          (headerText && (
+            <ModalHeader headerText={headerText} onClose={onClose} />
+          ))}
         <div className={`${styles.content} ${customModalContentStyle}`}>
           {children}
         </div>

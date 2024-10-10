@@ -1,7 +1,8 @@
-import { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Modal from '@/shared/ui/modal/index';
 import useModalStore from '@/shared/ui/modal/useModalStore';
 import { useCreditStore } from '@/entities/store/store';
+import CloseIcon from '@/assets/images/btn-pagination-left.svg';
 import useVoteStore from './useVoteStore';
 import ModalListItem from './ModalList';
 import styles from './VoteModal.module.scss';
@@ -12,6 +13,16 @@ const VoteModal = ({ items = [], onClose, gender }) => {
   const { payCredit } = useCreditStore();
   const [selectedIdolId, setSelectedIdolId] = useState(null);
   const modalId = useRef('chart');
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleClick = async () => {
     const voteCost = 1000;
@@ -21,10 +32,12 @@ const VoteModal = ({ items = [], onClose, gender }) => {
       await payCredit(voteCost);
       closeModal(modalId.current);
       onClose();
+      setSelectedIdolId(null);
     }
   };
 
   const handleModalClose = () => {
+    setSelectedIdolId(null);
     closeModal(modalId.current);
     onClose();
   };
@@ -37,12 +50,32 @@ const VoteModal = ({ items = [], onClose, gender }) => {
     setSelectedIdolId(id);
   };
 
+  const customHeader = (
+    <div className={styles.customHeader}>
+      <button onClick={handleModalClose} className={styles.closeButton}>
+        <img src={CloseIcon} alt="Close" className={styles.closeButtonIcon} />
+      </button>
+      <span className={styles.headerText}>
+        {gender === 'female' ? '이달의 여자 아이돌' : '이달의 남자 아이돌'}
+      </span>
+    </div>
+  );
+
+  let headerText = '';
+  let finalCustomHeader = null;
+
+  if (isMobile) {
+    finalCustomHeader = customHeader;
+  } else {
+    headerText =
+      gender === 'female' ? '이달의 여자 아이돌' : '이달의 남자 아이돌';
+  }
+
   return (
     modals[modalId.current]?.isVisible && (
       <Modal
-        headerText={
-          gender === 'female' ? '이달의 여자 아이돌' : '이달의 남자 아이돌'
-        }
+        headerText={headerText}
+        customHeader={finalCustomHeader}
         onClose={handleModalClose}
         customModalContainerStyle={styles.voteModal}
         customModalContentStyle={styles.customModalContentStyle}
