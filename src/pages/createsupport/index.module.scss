@@ -1,4 +1,9 @@
-.background {
-  color: #ffffff;
+.container {
+  margin: 100px auto;
 }
-// PC: 1200px 이상- Tablet: 768px 이상 ~ 1199px 이하- Mobile: 375px 이상 ~ 767px 이하
+
+@media screen and (max-width: 1199px) {
+  .container {
+    margin: 120px auto;
+  }
+}

@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 80px;
   width: 600px;
-  margin: 80px auto;
+  margin: 100px auto;
 }
 
 .questions {
@@ -26,4 +26,18 @@
 .submit {
   padding: 8px 20px;
 }
-// PC: 1200px 이상- Tablet: 768px 이상 ~ 1199px 이하- Mobile: 375px 이상 ~ 767px 이하
+
+// tablet
+@media screen and (max-width: 1199px) {
+  .form {
+    margin: 120px auto;
+  }
+}
+
+// mobile
+@media screen and (max-width: 767px) {
+  .form {
+    width: 400px;
+    margin: 120px auto;
+  }
+}
