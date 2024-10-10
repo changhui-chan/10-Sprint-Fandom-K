@@ -37,11 +37,11 @@ const SelectIdol = ({
               </div>
             )}
           </div>
+          <div className={styles.selectInfo}>
+            <IdolInfo name={name} nameSize={nameSize} />
+            <IdolInfo group={group} groupSize={groupSize} />
+          </div>
         </button>
-        <div className={styles.selectInfo}>
-          <IdolInfo name={name} nameSize={nameSize} />
-          <IdolInfo group={group} groupSize={groupSize} />
-        </div>
       </div>
     </div>
   );
