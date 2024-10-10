@@ -16,6 +16,10 @@
   &:disabled {
     display: none;
   }
+
+  &:hover {
+    filter: brightness(1.2);
+  }
 }
 
 .left {
@@ -39,15 +43,17 @@
 }
 
 .key {
+  width: 100%;
   display: flex;
+  justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 10px;
+  gap: 4px;
   border: 1px solid variables.$white;
   border-radius: 12px;
+  line-height: 24px;
   color: #ffffff;
-  margin: 0 auto;
-  padding: 12px 88px;
+  padding: 12px 0;
 
   img {
     width: 24px;
@@ -55,7 +61,7 @@
   }
 }
 
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: 1376px) {
   .button {
     display: none;
   }
@@ -69,6 +75,11 @@
 
   .key {
     font-size: 14px;
-    padding: 6px 40px;
+    padding: 6px 0;
+
+    img {
+      width: 16px;
+      height: 16px;
+    }
   }
 }

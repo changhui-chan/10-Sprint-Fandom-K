@@ -3,11 +3,13 @@ import useModalStore from '@/shared/ui/modal/useModalStore';
 import useCarousel from '@/shared/hooks/useCarousel';
 import leftIcon from '@/assets/images/btn-pagination-left.svg';
 import rightIcon from '@/assets/images/btn-pagination-right.svg';
+import clockIcon from '@/assets/images/ic-clock.svg';
 import caculateProgress from '@/shared/utils/caculateProgress';
 import { formatDate, getRamainingDays } from '@/shared/utils/formatDate';
+import { useCreditStore } from '@/entities/store/store';
+import starIcon from '@/assets/images/ic-star-orange.svg';
 import { useRef } from 'react';
 import styles from './CardList.module.scss';
-import { useCreditStore } from '../../entities/store/store';
 
 const CardList = ({ supports, type = '' }) => {
   const {
@@ -66,6 +68,7 @@ const CardList = ({ supports, type = '' }) => {
               receivedDonations,
               targetDonation,
               deadline,
+              status,
             }) => {
               return (
                 <li key={id} className={styles.card}>
@@ -79,6 +82,7 @@ const CardList = ({ supports, type = '' }) => {
                       receivedDonations,
                       targetDonation
                     )}
+                    status={status}
                     onButtonClick={() =>
                       handleButtonClick(
                         id,
@@ -90,12 +94,15 @@ const CardList = ({ supports, type = '' }) => {
                   >
                     {type === 'hot' && (
                       <div className={styles.key}>
+                        {caculateProgress(receivedDonations, targetDonation) ===
+                          100 && <img src={starIcon} alt="스타 아이콘" />}
                         {caculateProgress(receivedDonations, targetDonation)}%
                         달성
                       </div>
                     )}
                     {type === 'deadline' && (
                       <div className={styles.key}>
+                        <img src={clockIcon} alt="시계 아이콘" />
                         {getRamainingDays(deadline)}
                       </div>
                     )}

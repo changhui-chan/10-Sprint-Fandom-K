@@ -1,5 +1,5 @@
 const caculateProgress = (current, total) => {
-  const progress = (current / total) * 100;
+  const progress = Math.min((current / total) * 100, 100);
 
   return Math.floor(progress);
 };
