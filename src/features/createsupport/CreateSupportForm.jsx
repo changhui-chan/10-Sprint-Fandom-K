@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import Button from '@/shared/ui/Button';
 import { IDOL_EX } from '@/shared/constant/QUESTIONS';
@@ -6,6 +6,7 @@ import styles from './CreateSupportForm.module.scss';
 import Question from './Question';
 import QuestionIdol from './QuestionIdol';
 import QuestionDate from './QuestionDate';
+import useFormStore from './useFormStore';
 
 const CreateSupportForm = () => {
   const [gender, setGender] = useState(`${IDOL_EX.GENDER}`);
@@ -24,10 +25,7 @@ const CreateSupportForm = () => {
     targetDonation: true,
   });
 
-  const handelIdolIdChange = () => {
-    // group이랑 member 값으로 api 요청, id 세팅하기
-    setIdolId(1111);
-  };
+  const { newId, getIdolId, postSupport } = useFormStore();
 
   const handleGenderChange = (e) => {
     setGender(e.target.value);
@@ -49,12 +47,26 @@ const CreateSupportForm = () => {
 
   const handleMemberChange = (e) => {
     setMember(e.target.value);
-    handelIdolIdChange();
+
     setIsValid((prevValues) => ({
       ...prevValues,
       idolId: true,
     }));
   };
+
+  useEffect(() => {
+    console.log('useEffect 동작: ', gender, group, member);
+    if (
+      gender !== IDOL_EX.GENDER &&
+      group !== IDOL_EX.GROUP &&
+      member !== IDOL_EX.MEMBER
+    ) {
+      console.log('status 조건만족: ', gender, group, member);
+      getIdolId(group, member);
+      console.log('newID값: ', newId);
+      setIdolId(newId);
+    }
+  }, [gender, group, member, getIdolId, newId]);
 
   const handleTitleChange = (e) => {
     if (e.target.value === '') {
@@ -129,21 +141,22 @@ const CreateSupportForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const formattedDeadline = dayjs(deadline).format();
+    const formattedDonation = targetDonation.replaceAll(',', '');
+
     const result = {
-      deadline: { deadline },
-      targetDonation: { targetDonation },
-      subtitle: { subtitle },
-      title: { title },
-      idolId: { idolId },
+      deadline: `${formattedDeadline}`,
+      targetDonation: Number(`${formattedDonation}`),
+      subtitle: `${subtitle}`,
+      title: `${title}`,
+      idolId: Number(`${idolId}`),
     };
-    // 변경 예정
-    // POST 보내기, 통합 fetch 이용
-    // console.log(result);
+    // console.log('post: ', result);
+    postSupport(result);
   };
 
   const handleCantSubmit = (e) => {
     e.preventDefault();
-    // 제출 막았을때 동작 추가할건지
     // console.log('message: Cant Submit (Invalid Input)');
   };
 
