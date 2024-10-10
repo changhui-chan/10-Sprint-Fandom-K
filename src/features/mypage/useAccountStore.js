@@ -4,13 +4,16 @@ import { URL_IDOLS } from '../../shared/constant/url';
 
 export const useAccountStore = create((set) => ({
   idolData: [],
-  isLoding: false,
+  isLoading: false,
   error: null,
   fetchAccount: async () => {
     set({ isLoading: true, error: null });
     try {
-      const { data } = await fetchData(URL_IDOLS, { pageSize: 9999 });
-      set({ idolData: data.list });
+      const { data } = await fetchData(URL_IDOLS, { pageSize: 999 });
+      const uniqueIdolData = data.list.filter(
+        (item, index, self) => self.findIndex((t) => t.id === item.id) === index
+      );
+      set({ idolData: uniqueIdolData });
     } catch (error) {
       set({ error: error.message });
     } finally {
