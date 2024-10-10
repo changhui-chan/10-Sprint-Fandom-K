@@ -15,6 +15,7 @@ const SelectIdol = ({
   const { idolState, toggleIdolState } = useIdolStateStore();
 
   const handleButtonClick = () => {
+    if (preventClick) return;
     toggleIdolState(item);
   };
 
