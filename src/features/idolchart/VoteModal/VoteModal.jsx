@@ -20,11 +20,13 @@ const VoteModal = ({ items = [], onClose, gender }) => {
       await contributeVote(Number(selectedIdolId));
       await payCredit(voteCost);
       closeModal(modalId.current);
-      onClose();
+      onClose(true);
+      setSelectedIdolId(null);
     }
   };
 
   const handleModalClose = () => {
+    setSelectedIdolId(null);
     closeModal(modalId.current);
     onClose();
   };
