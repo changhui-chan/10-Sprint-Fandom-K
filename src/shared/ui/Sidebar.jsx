@@ -140,7 +140,7 @@ const Sidebar = (buttonClick = () => {}) => {
                     <li>
                       <img src={createSupportIcon} alt="후원 아이콘" />
                       <Link
-                        to="/mypage/create-support"
+                        to="/create-support"
                         className={styles.link}
                         onClick={closeSidebar}
                       >
