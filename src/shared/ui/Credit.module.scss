@@ -26,11 +26,34 @@
   }
 }
 
-.radio {
-  border-radius: 999px;
-  background-color: variables.$white;
-  width: 12px;
-  height: 12px;
+.radioLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.radioInput {
+  display: none;
+}
+
+.radioIcon {
+  width: 16px;
+  height: 16px;
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media screen and (max-width: 1199px) {
+    margin-left: 4px;
+  }
+  @media screen and (max-width: 767px) {
+    margin-left: 3px;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
 }
 
 .radioButton {
