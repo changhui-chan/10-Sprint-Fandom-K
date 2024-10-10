@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  img {
+    width: 160px;
+    height: 160px;
+  }
+
+  h1 {
+    font-size: 120px;
+    font-weight: 700;
+    color: variables.$white;
+  }
+
+  p {
+    color: variables.$gray;
+    font-size: 24px;
+  }
+}

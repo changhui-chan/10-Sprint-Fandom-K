@@ -6,6 +6,7 @@ import SupportPage from '../pages/support';
 import CreateSupportPage from '../pages/createsupport';
 import Mypage from '../pages/mypage';
 import ChartPage from '../pages/chart';
+import NotFoundPage from '../pages/not-found';
 
 const AppRouter = () => {
   return (
@@ -17,7 +18,7 @@ const AppRouter = () => {
           <Route path="/create-support" element={<CreateSupportPage />}></Route>
           <Route path="/mypage" element={<Mypage />}></Route>
           <Route path="/chart" element={<ChartPage />}></Route>
-          <Route path="*" element={<div>Not Found</div>}></Route>
+          <Route path="*" element={<NotFoundPage />}></Route>
         </Route>
       </Routes>
     </Router>
