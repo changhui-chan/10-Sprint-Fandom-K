@@ -113,6 +113,10 @@
 }
 
 @media screen and (max-width: 1199px) {
+  .fragment {
+    padding: 0 24px;
+  }
+  
   .button {
     display: none;
   }
