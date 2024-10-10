@@ -64,7 +64,12 @@ const Account = () => {
   };
 
   const handleAddIdol = () => {
-    addIdol(tempIdolList);
+    if (tempIdolList.length <= 0) return;
+    const selectedIdolIds = selectedIdolList.map((idol) => idol.id);
+    const filteredTempIdolList = tempIdolList.filter(
+      (idol) => !selectedIdolIds.includes(idol.id)
+    );
+    addIdol(filteredTempIdolList);
     resetIdolState(idolData);
     removeTempIdol(tempIdolList);
   };

@@ -10,7 +10,10 @@ export const useAccountStore = create((set) => ({
     set({ isLoading: true, error: null });
     try {
       const { data } = await fetchData(URL_IDOLS, { pageSize: 999 });
-      set({ idolData: data.list });
+      const uniqueIdolData = data.list.filter(
+        (item, index, self) => self.findIndex((t) => t.id === item.id) === index
+      );
+      set({ idolData: uniqueIdolData });
     } catch (error) {
       set({ error: error.message });
     } finally {
