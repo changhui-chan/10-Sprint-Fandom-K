@@ -24,11 +24,11 @@ const Account = () => {
     removeTempIdol,
   } = useSelectedIdolListStore();
   const [idolToShow, setIdolToShow] = useState(16);
-  const allCarousel = useCarousel(idolData.length, idolToShow, 115);
+  const allCarousel = useCarousel(idolData.length / 2, idolToShow, 155);
   const selectedCarousel = useCarousel(
     selectedIdolList.length,
     idolToShow,
-    115
+    155
   );
 
   useEffect(() => {
@@ -137,9 +137,7 @@ const Account = () => {
       <div className={styles.wrapper}>
         <button
           className={`${styles.button} ${styles.left}`}
-          onClick={() =>
-            selectedCarousel.handleButton(allCarousel.currentIndex - 1)
-          }
+          onClick={() => allCarousel.handleButton(allCarousel.currentIndex - 1)}
           disabled={allCarousel.currentIndex === 0}
         >
           <img src={leftIcon} alt="이전 슬라이드" />

@@ -9,7 +9,7 @@ export const useAccountStore = create((set) => ({
   fetchAccount: async () => {
     set({ isLoading: true, error: null });
     try {
-      const { data } = await fetchData(URL_IDOLS, { pageSize: 9999 });
+      const { data } = await fetchData(URL_IDOLS, { pageSize: 999 });
       set({ idolData: data.list });
     } catch (error) {
       set({ error: error.message });

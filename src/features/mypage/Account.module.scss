@@ -38,7 +38,7 @@
   grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
   grid-template-rows: repeat(2, 183px);
   grid-auto-flow: column;
-  gap: 32px 24px;
+  gap: 32px 40px;
   transition: transform 0.3s ease-in-out;
   max-height: calc(2 * 183px + 32px);
   user-select: none;
@@ -49,7 +49,7 @@
   grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
   grid-template-rows: repeat(1, 183px);
   grid-auto-flow: column;
-  gap: 24px;
+  gap: 40px;
   transition: transform 0.3s ease-in-out;
   max-height: calc(183px + 32px);
   user-select: none;
