@@ -8,6 +8,7 @@ import useInputStore from './useInputStore';
 import useSupportStore from './useSupportStore';
 import useSubmitStore from './useSubmitStore';
 import styles from './SupportModal.module.scss';
+import LoadingBar from '../loading';
 
 const SupportModal = () => {
   const { credit, payCredit } = useCreditStore();
@@ -76,6 +77,7 @@ const SupportModal = () => {
         buttonClick={handleButtonClick}
         isVisible={modals[modalId.current]?.isVisible}
       >
+        <LoadingBar isLoading={isSubmitting} />
         <div className={styles.container}>
           <img
             src={modals[modalId.current]?.content?.image}

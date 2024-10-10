@@ -12,10 +12,12 @@ import styles from './styles.module.scss';
 import useIdolStore from './useIdolStore';
 import useFullIdolStore from './useFullStore';
 import ErrorMessage from '../error';
+import LoadingBar from '../loading';
 
 const Chart = () => {
   const { fullIdols, fetchAllIdols } = useFullIdolStore();
-  const { idols, fetchIdols, pageSize, setPageSize, error } = useIdolStore();
+  const { idols, fetchIdols, pageSize, setPageSize, error, isLoading } =
+    useIdolStore();
   const [gender, setGender] = useState('female');
   const { openModal, closeModal } = useModalStore();
   const { credit } = useCreditStore();
@@ -37,8 +39,8 @@ const Chart = () => {
   }, [gender, pageSize, fetchIdols]);
 
   const handleModalClose = async () => {
-    // await fetchIdols(gender, pageSize);
-    // await fetchAllIdols(gender);
+    await fetchIdols(gender, pageSize);
+    await fetchAllIdols(gender);
     closeModal(modalId.current);
   };
 
@@ -58,6 +60,7 @@ const Chart = () => {
 
   return (
     <div className={styles.chartPage}>
+      <LoadingBar isLoading={isLoading} />
       <div className={styles.chartHeader}>
         <div className={styles.chartHead1}>
           {idols.length && <IdolImage idol={idols[0]} />}
