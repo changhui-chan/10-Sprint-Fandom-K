@@ -9,7 +9,7 @@ const useSupportStore = create((set) => ({
   fetchSupports: async () => {
     set({ isLoading: true, error: null });
     try {
-      const { data } = await fetchData(URL_DONATIONS);
+      const { data } = await fetchData(URL_DONATIONS, { pageSize: 20 });
       set({ supports: data.list });
     } catch (error) {
       set({ error: error.message });
