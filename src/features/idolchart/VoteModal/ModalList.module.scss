@@ -13,38 +13,25 @@
 .idolFirstSection {
   display: flex;
   align-items: center;
+  gap: 9px;
 }
 
 .idolGandN {
   display: flex;
   gap: 4px;
-  @media screen and (max-width: 1199px) {
-    gap: 3px;
-  }
 }
 
 .idolGandNandV {
   display: flex;
   flex-direction: column;
   margin-left: 10px;
-
-  @media screen and (max-width: 1199px) {
-    margin-left: 8px;
-  }
-  @media screen and (max-width: 767px) {
-    margin-left: 6px;
-  }
+  gap: 4px;
 }
 
 .idolVote {
   font-size: 14px;
   color: variables.$light-gray;
-  @media screen and (max-width: 1199px) {
-    font-size: 12px;
-  }
-  @media screen and (max-width: 767px) {
-    font-size: 10px;
-  }
+  font-weight: 400;
 }
 
 .radioLabel {

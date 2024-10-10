@@ -5,18 +5,21 @@ import False from '@/assets/images/radio-false.svg';
 import styles from './ModalList.module.scss';
 
 const ModalListItem = ({ item, isSelected, onClick }) => {
-  const { id: itemId, name, group, profilePicture, totalVotes } = item;
-
+  const { id: itemId, name, group, rank, profilePicture, totalVotes } = item;
+  const { nameSize, groupSize, rankSize } = {
+    nameSize: '14px',
+    groupSize: '14px',
+    rankSize: '15px',
+  };
   return (
     <div className={styles.idolListItem}>
       <div className={styles.idolFirstSection}>
         <IdolProfile profilePicture={profilePicture} name={name} />
+        <IdolInfo rank={rank} rankSize={rankSize} />
         <div className={styles.idolGandNandV}>
           <div className={styles.idolGandN}>
-            <IdolInfo group={group} />
-            <div className={styles.idolName}>
-              <IdolInfo name={name} />
-            </div>
+            <IdolInfo group={group} groupSize={groupSize} />
+            <IdolInfo name={name} nameSize={nameSize} />
           </div>
           <div className={styles.idolVote}>{totalVotes.toLocaleString()}표</div>
         </div>

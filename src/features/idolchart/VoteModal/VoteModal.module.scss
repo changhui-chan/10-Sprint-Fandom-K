@@ -55,11 +55,34 @@
 }
 
 .alertText {
-  color: variables.$pink;
+  color: variables.$orange;
 }
 
 .customModalContentStyle {
   @media (max-width: 767px) {
     height: calc(100vh - 20vh);
   }
+}
+
+.customHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  left: 16px;
+  background: none;
+  cursor: pointer;
+}
+.closeButtonIcon {
+  width: 25px;
+}
+.headerText {
+  font-size: 17px;
+  color: variables.$white;
+  text-align: center;
+  flex-grow: 1;
 }

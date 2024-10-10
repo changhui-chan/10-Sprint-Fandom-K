@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import Modal from '@/shared/ui/modal/index';
 import useModalStore from '@/shared/ui/modal/useModalStore';
 import { useCreditStore } from '@/entities/store/store';
+import CloseIcon from '@/assets/images/btn-pagination-left.svg';
 import useVoteStore from './useVoteStore';
 import ModalListItem from './ModalList';
 import styles from './VoteModal.module.scss';
@@ -21,6 +22,7 @@ const VoteModal = ({ items = [], onClose, gender }) => {
       await payCredit(voteCost);
       closeModal(modalId.current);
       onClose();
+      setSelectedIdolId(null);
     }
   };
 
@@ -38,12 +40,24 @@ const VoteModal = ({ items = [], onClose, gender }) => {
     setSelectedIdolId(id);
   };
 
+  const customHeader = (
+    <div className={styles.customHeader}>
+      <button onClick={handleModalClose} className={styles.closeButton}>
+        <img src={CloseIcon} alt="Close" className={styles.closeButtonIcon} />
+      </button>
+      <span className={styles.headerText}>
+        {gender === 'female' ? '이달의 여자 아이돌' : '이달의 남자 아이돌'}
+      </span>
+    </div>
+  );
+
   return (
     modals[modalId.current]?.isVisible && (
       <Modal
         headerText={
           gender === 'female' ? '이달의 여자 아이돌' : '이달의 남자 아이돌'
         }
+        customHeader={customHeader}
         onClose={handleModalClose}
         customModalContainerStyle={styles.voteModal}
         customModalContentStyle={styles.customModalContentStyle}
