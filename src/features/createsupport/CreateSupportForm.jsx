@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import Button from '@/shared/ui/Button';
 import { IDOLID_EX } from '@/shared/constant/QUESTIONS';
@@ -24,6 +25,8 @@ const CreateSupportForm = () => {
     deadline: true,
     targetDonation: true,
   });
+
+  const navigate = useNavigate();
 
   const { newId, getIdolId, postSupport } = useFormStore();
 
@@ -148,6 +151,7 @@ const CreateSupportForm = () => {
     };
     // console.log('post: ', result);
     postSupport(result);
+    navigate('/support');
   };
 
   const doNotSubmit = () => {
