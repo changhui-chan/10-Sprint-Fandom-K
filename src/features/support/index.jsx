@@ -4,8 +4,9 @@ import useSupportStore from './useSupportStore';
 import CardList from './CardList';
 import SupportModal from './SupportModal';
 import AlertModal from '../credit/AlertModal';
-import styles from './index.module.scss';
 import ErrorMessage from '../error';
+import LoadingBar from '../loading';
+import styles from './index.module.scss';
 
 const Support = () => {
   const { supports, isLoading, error, fetchSupports } = useSupportStore();
@@ -14,10 +15,9 @@ const Support = () => {
     fetchSupports();
   }, [fetchSupports]);
 
-  if (isLoading) return <p className={styles.loading}>Loading...</p>;
-
   return (
     <section className={styles.container}>
+      <LoadingBar isLoading={isLoading} />
       <div className={styles.banner}>
         <div className={styles.bannerContent}>
           <p>
