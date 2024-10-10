@@ -36,10 +36,13 @@ const Chart = () => {
     fetchIdols(gender, pageSize);
   }, [gender, pageSize, fetchIdols]);
 
-  const handleModalClose = async () => {
-    // await fetchIdols(gender, pageSize);
-    // await fetchAllIdols(gender);
+  const handleModalClose = async (refresh = false) => {
     closeModal(modalId.current);
+
+    if (refresh) {
+      await fetchAllIdols(gender);
+      await fetchIdols(gender, pageSize);
+    }
   };
 
   const loadMoreIdols = async () => {
