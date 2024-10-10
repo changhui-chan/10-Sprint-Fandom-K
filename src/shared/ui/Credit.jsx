@@ -1,4 +1,6 @@
 import CreditIcon from '@/assets/images/credit.svg';
+import True from '@/assets/images/radio-true.svg';
+import False from '@/assets/images/radio-false.svg';
 import { useState, useRef } from 'react';
 import styles from './Credit.module.scss';
 import {
@@ -89,11 +91,24 @@ const Credit = ({ customStyle }) => {
                   className={styles.creditIcon}
                 />
                 <p>{value}</p>
-                <div
-                  className={`
-                ${styles.radio} 
-                ${selected === index ? styles.selected : ''}`}
-                />
+                <label
+                  htmlFor={`idol-radio-${index}`}
+                  className={styles.radioLabel}
+                >
+                  <input
+                    type="radio"
+                    id={`idol-radio-${index}`}
+                    checked={selected === index}
+                    onChange={onClick}
+                    className={styles.radioInput}
+                  />
+                  <span className={styles.radioIcon}>
+                    <img
+                      src={selected === index ? True : False}
+                      alt="radio-icon"
+                    />
+                  </span>
+                </label>
               </button>
             ))}
           </div>
