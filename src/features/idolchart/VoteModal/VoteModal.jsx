@@ -25,6 +25,7 @@ const VoteModal = ({ items = [], onClose, gender }) => {
   };
 
   const handleModalClose = () => {
+    setSelectedIdolId(null);
     closeModal(modalId.current);
     onClose();
   };
