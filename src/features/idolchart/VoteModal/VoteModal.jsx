@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Modal from '@/shared/ui/modal/index';
 import useModalStore from '@/shared/ui/modal/useModalStore';
 import { useCreditStore } from '@/entities/store/store';
@@ -13,6 +13,16 @@ const VoteModal = ({ items = [], onClose, gender }) => {
   const { payCredit } = useCreditStore();
   const [selectedIdolId, setSelectedIdolId] = useState(null);
   const modalId = useRef('chart');
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleClick = async () => {
     const voteCost = 1000;
@@ -51,13 +61,21 @@ const VoteModal = ({ items = [], onClose, gender }) => {
     </div>
   );
 
+  let headerText = '';
+  let finalCustomHeader = null;
+
+  if (isMobile) {
+    finalCustomHeader = customHeader;
+  } else {
+    headerText =
+      gender === 'female' ? '이달의 여자 아이돌' : '이달의 남자 아이돌';
+  }
+
   return (
     modals[modalId.current]?.isVisible && (
       <Modal
-        headerText={
-          gender === 'female' ? '이달의 여자 아이돌' : '이달의 남자 아이돌'
-        }
-        customHeader={customHeader}
+        headerText={headerText}
+        customHeader={finalCustomHeader}
         onClose={handleModalClose}
         customModalContainerStyle={styles.voteModal}
         customModalContentStyle={styles.customModalContentStyle}

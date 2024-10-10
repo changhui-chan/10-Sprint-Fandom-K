@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import styles from './index.module.scss';
 import ModalHeader from './ModalHeader';
 import ModalFooter from './ModalFooter';
@@ -6,7 +6,6 @@ import Button from '../Button';
 
 const Modal = ({
   headerText = '',
-  customHeader = null,
   footerElement = null,
   children = null,
   customModalContainerStyle = '',
@@ -17,22 +16,9 @@ const Modal = ({
   onClose = () => {},
   buttonClick = () => {},
   isVisible = false,
+  customHeader = null,
 }) => {
   const modalRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -79,12 +65,10 @@ const Modal = ({
         ref={modalRef}
         className={`${styles.container} ${isVisible ? styles.visible : styles.hidden} ${customModalContainerStyle}`}
       >
-        {isMobile && customHeader ? (
-          <div className={styles.customHeader}>{customHeader}</div>
-        ) : (
-          <ModalHeader headerText={headerText} onClose={onClose} />
-        )}
-
+        {customHeader ||
+          (headerText && (
+            <ModalHeader headerText={headerText} onClose={onClose} />
+          ))}
         <div className={`${styles.content} ${customModalContentStyle}`}>
           {children}
         </div>
