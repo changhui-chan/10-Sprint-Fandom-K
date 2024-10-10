@@ -8,7 +8,7 @@ const IdolListItem = ({ item }) => {
   return (
     <div className={styles.idolListItem}>
       <div className={styles.idolFirstSection}>
-        <IdolProfile profilePicture={profilePicture} name={name} size="63px" />
+        <IdolProfile profilePicture={profilePicture} name={name} />
         <IdolInfo rank={rank} />
         <div className={styles.idolGandN}>
           <IdolInfo group={group} />

@@ -1,18 +1,22 @@
 .idolList {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  padding: 0;
   padding: 10px 30px;
-  gap: 13px;
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 1199px) {
     grid-template-columns: repeat(1, 1fr);
   }
 }
 
 .idolListItem {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  align-items: center;
+  margin: 15px;
+  border-bottom: 1px solid variables.$light-gray;
+  &:last-of-type {
+    border-bottom: none;
+  }
 }
 
 .idolFirstSection {
@@ -20,7 +24,6 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  padding-bottom: 5px;
 }
 
 .idolGandN {
