@@ -5,6 +5,7 @@ import CardList from './CardList';
 import SupportModal from './SupportModal';
 import AlertModal from '../credit/AlertModal';
 import styles from './index.module.scss';
+import ErrorMessage from '../error';
 
 const Support = () => {
   const { supports, isLoading, error, fetchSupports } = useSupportStore();
@@ -14,7 +15,6 @@ const Support = () => {
   }, [fetchSupports]);
 
   if (isLoading) return <p className={styles.loading}>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
 
   return (
     <section className={styles.container}>
@@ -27,30 +27,36 @@ const Support = () => {
           <h1>최애에게 사랑을 전해보세요</h1>
         </div>
       </div>
-      <div className={styles.cardList}>
-        <h2>지금 가장 핫한 서포트</h2>
-        <CardList
-          supports={supports.toSorted(
-            (a, b) =>
-              caculateProgress(b.receivedDonations, b.targetDonation) -
-              caculateProgress(a.receivedDonations, a.targetDonation)
-          )}
-          type="hot"
-        />
-      </div>
-      <div className={styles.cardList}>
-        <h2>마감 임박 서포트</h2>
-        <CardList
-          supports={supports.toSorted(
-            (a, b) => new Date(a.deadline) - new Date(b.deadline)
-          )}
-          type="deadline"
-        />
-      </div>
-      <div className={styles.cardList}>
-        <h2>전체 서포트</h2>
-        <CardList supports={supports} />
-      </div>
+      {error ? (
+        <ErrorMessage onClick={fetchSupports} />
+      ) : (
+        <>
+          <div className={styles.cardList}>
+            <h2>지금 가장 핫한 서포트</h2>
+            <CardList
+              supports={supports.toSorted(
+                (a, b) =>
+                  caculateProgress(b.receivedDonations, b.targetDonation) -
+                  caculateProgress(a.receivedDonations, a.targetDonation)
+              )}
+              type="hot"
+            />
+          </div>
+          <div className={styles.cardList}>
+            <h2>마감 임박 서포트</h2>
+            <CardList
+              supports={supports.toSorted(
+                (a, b) => new Date(a.deadline) - new Date(b.deadline)
+              )}
+              type="deadline"
+            />
+          </div>
+          <div className={styles.cardList}>
+            <h2>전체 서포트</h2>
+            <CardList supports={supports} />
+          </div>
+        </>
+      )}
       <SupportModal />
       <AlertModal />
     </section>

@@ -1,15 +1,12 @@
-import useIdolStore from '@/features/idolchart/useIdolStore';
 import styles from './IdolImage.module.scss';
 
-const IdolImage = () => {
-  const { topIdol } = useIdolStore();
-
+const IdolImage = ({ idol }) => {
   return (
     <div className={styles.idolImageWrapper}>
-      {topIdol && (
+      {idol && (
         <img
-          src={topIdol.profilePicture}
-          alt={topIdol.name}
+          src={idol.profilePicture}
+          alt={idol.name}
           className={styles.idolImage}
         />
       )}

@@ -11,10 +11,11 @@ import AlertModal from '../credit/AlertModal';
 import styles from './styles.module.scss';
 import useIdolStore from './useIdolStore';
 import useFullIdolStore from './useFullStore';
+import ErrorMessage from '../error';
 
 const Chart = () => {
   const { fullIdols, fetchAllIdols } = useFullIdolStore();
-  const { idols, fetchIdols, topIdol, pageSize, setPageSize } = useIdolStore();
+  const { idols, fetchIdols, pageSize, setPageSize, error } = useIdolStore();
   const [gender, setGender] = useState('female');
   const { openModal, closeModal } = useModalStore();
   const { credit } = useCreditStore();
@@ -36,8 +37,8 @@ const Chart = () => {
   }, [gender, pageSize, fetchIdols]);
 
   const handleModalClose = async () => {
-    await fetchIdols(gender, pageSize);
-    await fetchAllIdols(gender);
+    // await fetchIdols(gender, pageSize);
+    // await fetchAllIdols(gender);
     closeModal(modalId.current);
   };
 
@@ -59,7 +60,7 @@ const Chart = () => {
     <div className={styles.chartPage}>
       <div className={styles.chartHeader}>
         <div className={styles.chartHead1}>
-          {topIdol && <IdolImage idol={topIdol} />}
+          {idols.length && <IdolImage idol={idols[0]} />}
         </div>
       </div>
       <div className={styles.chartInfo}>
@@ -67,9 +68,19 @@ const Chart = () => {
         <VoteButton onClick={handleVoteClick} />
       </div>
       <IdolSelect onGenderChange={setGender} />
-      <IdolList items={idols} />
-      <LoadMoreComponent onLoadMore={loadMoreIdols} />
-
+      {error ? (
+        <ErrorMessage
+          onClick={() => {
+            setPageSize(10);
+            fetchIdols(gender, 10);
+          }}
+        />
+      ) : (
+        <>
+          <IdolList items={idols} />
+          <LoadMoreComponent onLoadMore={loadMoreIdols} />
+        </>
+      )}
       <VoteModal items={fullIdols} onClose={handleModalClose} gender={gender} />
       <AlertModal />
     </div>
