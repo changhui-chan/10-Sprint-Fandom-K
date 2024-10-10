@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import Button from '@/shared/ui/Button';
-import { IDOL_EX } from '@/shared/constant/QUESTIONS';
+import { IDOLID_EX } from '@/shared/constant/QUESTIONS';
 import styles from './CreateSupportForm.module.scss';
 import Question from './Question';
 import QuestionIdol from './QuestionIdol';
@@ -9,14 +9,14 @@ import QuestionDate from './QuestionDate';
 import useFormStore from './useFormStore';
 
 const CreateSupportForm = () => {
-  const [gender, setGender] = useState(`${IDOL_EX.GENDER}`);
-  const [group, setGroup] = useState(`${IDOL_EX.GROUP}`);
-  const [member, setMember] = useState(`${IDOL_EX.MEMBER}`);
-  const [idolId, setIdolId] = useState('');
+  const [gender, setGender] = useState(`${IDOLID_EX.GENDER}`);
+  const [group, setGroup] = useState(`${IDOLID_EX.GROUP}`);
+  const [member, setMember] = useState(`${IDOLID_EX.MEMBER}`);
+  const [idolId, setIdolId] = useState(0);
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
   const [deadline, setDeadline] = useState('');
-  const [targetDonation, setTargetDonation] = useState(0);
+  const [targetDonation, setTargetDonation] = useState('0');
   const [isValid, setIsValid] = useState({
     idolId: true,
     title: true,
@@ -29,8 +29,8 @@ const CreateSupportForm = () => {
 
   const handleGenderChange = (e) => {
     setGender(e.target.value);
-    setGroup(`${IDOL_EX.GROUP}`);
-    setMember(`${IDOL_EX.MEMBER}`);
+    setGroup(`${IDOLID_EX.GROUP}`);
+    setMember(`${IDOLID_EX.MEMBER}`);
     setIsValid((prevValues) => ({
       ...prevValues,
       idolId: false,
@@ -38,7 +38,7 @@ const CreateSupportForm = () => {
   };
   const handleGroupChange = (e) => {
     setGroup(e.target.value);
-    setMember(`${IDOL_EX.MEMBER}`);
+    setMember(`${IDOLID_EX.MEMBER}`);
     setIsValid((prevValues) => ({
       ...prevValues,
       idolId: false,
@@ -55,15 +55,12 @@ const CreateSupportForm = () => {
   };
 
   useEffect(() => {
-    console.log('useEffect 동작: ', gender, group, member);
     if (
-      gender !== IDOL_EX.GENDER &&
-      group !== IDOL_EX.GROUP &&
-      member !== IDOL_EX.MEMBER
+      gender !== IDOLID_EX.GENDER &&
+      group !== IDOLID_EX.GROUP &&
+      member !== IDOLID_EX.MEMBER
     ) {
-      console.log('status 조건만족: ', gender, group, member);
       getIdolId(group, member);
-      console.log('newID값: ', newId);
       setIdolId(newId);
     }
   }, [gender, group, member, getIdolId, newId]);
@@ -138,9 +135,7 @@ const CreateSupportForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const doSubmit = () => {
     const formattedDeadline = dayjs(deadline).format();
     const formattedDonation = targetDonation.replaceAll(',', '');
 
@@ -155,15 +150,46 @@ const CreateSupportForm = () => {
     postSupport(result);
   };
 
-  const handleCantSubmit = (e) => {
-    e.preventDefault();
+  const doNotSubmit = () => {
     // console.log('message: Cant Submit (Invalid Input)');
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // idol id : 2, 3번째 드롭다운 선택중에 invalid 스타일로 표시되는 문제로 일단 제외
+    if (title === '') {
+      setIsValid((prevValues) => ({
+        ...prevValues,
+        title: false,
+      }));
+    } else if (subtitle === '') {
+      setIsValid((prevValues) => ({
+        ...prevValues,
+        subtitle: false,
+      }));
+    } else if (deadline === '') {
+      setIsValid((prevValues) => ({
+        ...prevValues,
+        deadline: false,
+      }));
+    } else if (targetDonation === '0') {
+      setIsValid((prevValues) => ({
+        ...prevValues,
+        targetDonation: false,
+      }));
+    } else {
+      if (Object.values(isValid).every((el) => el === true)) {
+        doSubmit();
+      }
+      doNotSubmit();
+    }
+  };
+
   const handleReset = () => {
-    setGender(`${IDOL_EX.GENDER}`);
-    setGroup(`${IDOL_EX.GROUP}`);
-    setMember(`${IDOL_EX.MEMBER}`);
+    setGender(`${IDOLID_EX.GENDER}`);
+    setGroup(`${IDOLID_EX.GROUP}`);
+    setMember(`${IDOLID_EX.MEMBER}`);
     setIdolId('');
     setTitle('');
     setSubtitle('');
@@ -179,18 +205,10 @@ const CreateSupportForm = () => {
   };
 
   return (
-    <form
-      className={styles.form}
-      onSubmit={
-        Object.values(isValid).every((el) => el === true)
-          ? handleSubmit
-          : handleCantSubmit
-      }
-    >
+    <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.questions}>
         <QuestionIdol
-          data="idol"
-          isValid
+          data="idolId"
           value={{ gender, group, member }}
           handleValueChange={{
             handleGenderChange,
