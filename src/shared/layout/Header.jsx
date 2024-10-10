@@ -25,7 +25,9 @@ const Header = () => {
         </Link>
         <div className={styles.user}>
           <Credit />
-          <Avatar />
+          <Link to="/mypage">
+            <Avatar />
+          </Link>
         </div>
       </div>
       <Sidebar />
