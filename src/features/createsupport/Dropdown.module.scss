@@ -25,3 +25,10 @@
 .option {
   background: variables.$black;
 }
+
+@media screen and (max-width: 767px) {
+  .select {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
